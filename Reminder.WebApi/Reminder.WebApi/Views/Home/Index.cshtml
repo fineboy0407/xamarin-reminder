@@ -1,0 +1,78 @@
+﻿<div>
+    <label>Введите email</label><br />
+    <input type="email" id="email" /> <br /><br />
+    <label>Введите пароль</label><br />
+    <input type="password" id="password" /><br /><br />
+    <label>Подтвердите пароль</label><br />
+    <input type="password" id="confirmpassword" /><br /><br />
+    <input type="submit" id="submit" value="Регистрация" />
+</div>
+
+<div class="userInfo" style="display:none;">
+    <p>Вы вошли как: <span class="userName"></span></p>
+    <input type="button" value="Выйти" id="logOut" />
+</div>
+<div class="loginForm">
+    <h3>Вход на сайт</h3>
+    <label>Введите email</label><br />
+    <input type="email" id="emailLogin" /> <br /><br />
+    <label>Введите пароль</label><br />
+    <input type="password" id="passwordLogin" /><br /><br />
+    <input type="submit" id="submitLogin" value="Логин" />
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#submit').click(function (e) {
+                e.preventDefault();
+                var data = {
+                    Email: $('#email').val(),
+                    Password: $('#password').val(),
+                    ConfirmPassword: $('#confirmpassword').val()
+                };
+ 
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Account/Register',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).success(function (data) {
+                    alert("Регистрация пройдена");
+                }).fail(function (data) {
+                    alert("В процесе регистрации возникла ошибка");
+                });
+            });
+
+            var tokenKey = "tokenInfo";
+            $('#submitLogin').click(function (e) {
+                e.preventDefault();
+                var loginData = {
+                    grant_type: 'password',
+                    username: $('#emailLogin').val(),
+                    password: $('#passwordLogin').val()
+                };
+ 
+                $.ajax({
+                    type: 'POST',
+                    url: '/Token',
+                    data: loginData
+                }).success(function (data) {
+                    $('.userName').text(data.userName);
+                    $('.userInfo').css('display', 'block');
+                    $('.loginForm').css('display', 'none');
+                    // сохраняем в хранилище sessionStorage токен доступа
+                    sessionStorage.setItem(tokenKey, data.access_token);
+                    console.log(data.access_token);
+                }).fail(function (data) {
+                    alert('При логине возникла ошибка');
+                });
+            });
+ 
+            $('#logOut').click(function (e) {
+                e.preventDefault();
+                sessionStorage.removeItem(tokenKey);
+            });
+        })
+    </script>
+}
