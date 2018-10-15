@@ -244,14 +244,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Entities\AchievementModel.cs" />
-    <Compile Include="Models\Entities\AchievementNote.cs" />
-    <Compile Include="Models\Entities\BirthdayModel.cs" />
-    <Compile Include="Models\Entities\Entity.cs" />
-    <Compile Include="Models\Entities\PhotoModel.cs" />
-    <Compile Include="Models\Entities\ToDoModel.cs" />
-    <Compile Include="Models\Entities\VideoModel.cs" />
-    <Compile Include="Models\Entities\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Entities\AchievementModel.cs" />
     <Compile Include="Entities\AchievementNote.cs" />
     <Compile Include="Entities\AppUser.cs" />
