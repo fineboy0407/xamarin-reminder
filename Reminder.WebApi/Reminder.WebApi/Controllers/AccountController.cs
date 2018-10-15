@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Reminder.DAL.Entities;
 using Reminder.WebApi.Models;
 using Reminder.WebApi.Providers;
 using Reminder.WebApi.Results;
@@ -244,7 +245,7 @@ namespace Reminder.WebApi.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            AppUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -253,9 +254,9 @@ namespace Reminder.WebApi.Controllers
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                 ClaimsIdentity oAuthIdentity = await ApplicationUserHelper.GenerateUserIdentityAsync(user, UserManager,
                     OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                ClaimsIdentity cookieIdentity = await ApplicationUserHelper.GenerateUserIdentityAsync(user, UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
                 AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
@@ -322,7 +323,7 @@ namespace Reminder.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new AppUser { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -351,7 +352,7 @@ namespace Reminder.WebApi.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new AppUser { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)

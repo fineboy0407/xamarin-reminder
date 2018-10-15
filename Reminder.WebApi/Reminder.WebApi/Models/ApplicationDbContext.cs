@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Reminder.DAL;
 using Reminder.WebApi.Helpers;
 
 namespace Reminder.WebApi.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : ApplicationContext
     {
         public ApplicationDbContext()
-            : base(ConstantHelper.DefaultConnection, throwIfV1Schema: false)
+            : base(ConstantHelper.DefaultConnection)
         {
         }
 

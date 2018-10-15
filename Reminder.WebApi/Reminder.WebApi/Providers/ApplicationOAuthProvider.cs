@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Reminder.DAL.Entities;
 using Reminder.WebApi.Models;
 
 namespace Reminder.WebApi.Providers
@@ -31,7 +32,7 @@ namespace Reminder.WebApi.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            AppUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -39,9 +40,9 @@ namespace Reminder.WebApi.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+            ClaimsIdentity oAuthIdentity = await ApplicationUserHelper.GenerateUserIdentityAsync(user, userManager,
                OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+            ClaimsIdentity cookiesIdentity = await ApplicationUserHelper.GenerateUserIdentityAsync(user, userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
