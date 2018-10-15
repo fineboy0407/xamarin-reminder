@@ -64,6 +64,7 @@
     <Compile Include="Entities\ToDoModel.cs" />
     <Compile Include="Entities\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

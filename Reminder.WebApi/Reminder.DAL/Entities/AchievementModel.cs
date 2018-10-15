@@ -4,6 +4,11 @@ namespace Reminder.DAL.Entities
 {
     public class AchievementModel : Entity
     {
+        public AchievementModel()
+        {
+            AchievementNotes = new List<AchievementNote>();
+        }
+
         public byte[] ImageContent { get; set; }
         public string Title { get; set; }
         public string GeneralDescription { get; set; }
@@ -12,6 +17,6 @@ namespace Reminder.DAL.Entities
         public string UserId { get; set; }
         public AppUser User { get; set; }
 
-        public List<AchievementNote> AchievementNotes { get; set; }
+        public ICollection<AchievementNote> AchievementNotes { get; set; }
     }
 }
