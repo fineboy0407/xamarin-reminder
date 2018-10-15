@@ -17,5 +17,17 @@ namespace Reminder.DAL
         public DbSet<PhotoModel> Photos { get; set; }
         public DbSet<VideoModel> Videos { get; set; }
         public DbSet<ToDoModel> ToDoModels { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Note>().ToTable("Notes");
+            modelBuilder.Entity<AchievementModel>().ToTable("Achievements");
+            modelBuilder.Entity<AchievementNote>().ToTable("AchievementNotes");
+            modelBuilder.Entity<BirthdayModel>().ToTable("Birthdays");
+            modelBuilder.Entity<PhotoModel>().ToTable("Photos");
+            modelBuilder.Entity<VideoModel>().ToTable("Videos");
+            modelBuilder.Entity<ToDoModel>().ToTable("ToDoModels");
+        }
     }
 }

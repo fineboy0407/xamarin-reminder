@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56E7074C-7805-474D-9668-788971D33502}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Reminder.DAL</RootNamespace>
-    <AssemblyName>Reminder.DAL</AssemblyName>
+    <ProjectGuid>{3FEBEF83-AB17-4A31-AE7D-6520A9A9F9FD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Reminder.Migrations</RootNamespace>
+    <AssemblyName>Reminder.Migrations</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -54,23 +56,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationContext.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Entities\AchievementModel.cs" />
-    <Compile Include="Entities\AchievementNote.cs" />
-    <Compile Include="Entities\AppUser.cs" />
-    <Compile Include="Entities\BirthdayModel.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Note.cs" />
-    <Compile Include="Entities\PhotoModel.cs" />
-    <Compile Include="Entities\ToDoModel.cs" />
-    <Compile Include="Entities\VideoModel.cs" />
+    <Compile Include="AppContext.cs" />
+    <Compile Include="Migrations\201810151355310_Initial.cs" />
+    <Compile Include="Migrations\201810151355310_Initial.Designer.cs">
+      <DependentUpon>201810151355310_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810151358593_TableNamesFix.cs" />
+    <Compile Include="Migrations\201810151358593_TableNamesFix.Designer.cs">
+      <DependentUpon>201810151358593_TableNamesFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reminder.DAL\Reminder.DAL.csproj">
+      <Project>{56E7074C-7805-474D-9668-788971D33502}</Project>
+      <Name>Reminder.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810151355310_Initial.resx">
+      <DependentUpon>201810151355310_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810151358593_TableNamesFix.resx">
+      <DependentUpon>201810151358593_TableNamesFix.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
