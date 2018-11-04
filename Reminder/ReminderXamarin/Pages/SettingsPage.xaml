@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.SettingsPage"
+             Title="{extensions:Translate Settings}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:SettingsPageViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <TableView Intent="Form" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <TableRoot>
+                    <TableSection Title="{extensions:Translate SettingsLoginSectionName}">
+                        <SwitchCell x:Name="UsePinSwitch" Text="{extensions:Translate UsePin}" On="{Binding UsePin}" OnChanged="UsePinSwitch_OnOnChanged" />
+                        <EntryCell x:Name="PinEntry" 
+                                   Text="{Binding Pin}"
+                                   IsEnabled="{Binding Source={x:Reference UsePinSwitch}, Path=On}" 
+                                   Keyboard="Numeric">
+                        </EntryCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+            <Button x:Name="ConfirmButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}" 
+                    HorizontalOptions="EndAndExpand" 
+                    Clicked="ConfirmButton_OnClicked" 
+                    Image="confirm.png" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:controls="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.AchievementsPage"
+             Title="{extensions:Translate Achievements}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:AchievementsPageViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <!-- List of achievements -->
+            <controls:FlowListView x:Name="AchievementsList" 
+                                   AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                   AbsoluteLayout.LayoutFlags="All"
+                                   SeparatorVisibility="None"
+                                   HasUnevenRows="true"
+                                   FlowItemsSource="{Binding Achievements}"
+                                   FlowColumnCount="3"
+                                   BackgroundColor="{StaticResource AchievementPageBackground}">
+                <controls:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="5">
+                            <AbsoluteLayout x:Name="ImageViewLayout" 
+                                            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                            AbsoluteLayout.LayoutFlags="All"  
+                                            HeightRequest="120"
+                                            Padding="5">
+                                <AbsoluteLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AchievementsList_OnItemSelected" />
+                                </AbsoluteLayout.GestureRecognizers>
+                                <!-- Hidden field for Id -->
+                                <Label IsVisible="False" Text="{Binding Id}" />
+                                <abstractions:CircleImage Source="{Binding ImageContent, 
+                                                                   Converter={StaticResource ByteToImageSourceConverter}}"
+                                                          Aspect="AspectFill"
+                                                          AbsoluteLayout.LayoutBounds="0,0,90,90" 
+                                                          AbsoluteLayout.LayoutFlags="PositionProportional"
+                                                          VerticalOptions="Center"
+                                                          HorizontalOptions="Center"
+                                                          HeightRequest="90"
+                                                          WidthRequest="90">
+                                </abstractions:CircleImage>
+
+                                <Button AbsoluteLayout.LayoutBounds="1,1,50,50" 
+                                        TextColor="White"
+                                        BackgroundColor="{Binding GeneralTimeSpent, Converter={StaticResource NumberToColorConverter}}"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional" 
+                                        Text="{Binding GeneralTimeSpent, Converter={StaticResource SpentTimePresentationConverter}}" 
+                                        HeightRequest="50" 
+                                        WidthRequest="50" 
+                                        CornerRadius="25"
+                                        FontSize="Micro" />
+                                
+                            </AbsoluteLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </controls:FlowListView.FlowColumnTemplate>
+            </controls:FlowListView>
+
+            <Button x:Name="CreateAchievementButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="add.png"
+                    Clicked="CreateAchievementButton_OnClicked" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

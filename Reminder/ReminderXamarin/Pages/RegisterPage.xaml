@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             xmlns:viewModels1="clr-namespace:ReminderXamarin.ViewModels"
+             xmlns:elements1="clr-namespace:ReminderXamarin.Elements"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.RegisterPage">
+    <ContentPage.BindingContext>
+        <viewModels1:RegisterViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <!-- Background image -->
+            <elements:BlurredImage x:Name="BackgroundImage"
+                                   Aspect="AspectFill"
+                                   AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                   AbsoluteLayout.LayoutFlags="All" />
+
+            <StackLayout BackgroundColor="Transparent" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                         AbsoluteLayout.LayoutFlags="All">
+                <StackLayout.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="10"/>
+                        <On Platform="iOS" Value="10,20,10,10"/>
+                    </OnPlatform>
+                </StackLayout.Padding>
+                <Label FontSize="Large"
+                   Text="{extensions:Translate Register}" 
+                   HorizontalOptions="Center" 
+                   TextColor="White" />
+                <StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                    <!-- User name -->
+                    <StackLayout Spacing="0">
+                        <Label Text="{extensions:Translate Username}" Style="{StaticResource LoginLabelStyle}" />
+                        <elements:EntryWithBorder x:Name="UserNameEntry" 
+                                              Style="{StaticResource LoginEntryStyle}"
+                                              Completed="UserNameEntry_OnCompleted"/>
+                    </StackLayout>
+
+                    <!-- Password -->
+                    <StackLayout Spacing="0">
+                        <Label Text="{extensions:Translate Password}" Style="{StaticResource LoginLabelStyle}" />
+                        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                            <elements:EntryWithBorder x:Name="PasswordEntry"
+                                                  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                  AbsoluteLayout.LayoutFlags="All"
+                                                  IsPassword="True" 
+                                                  Style="{StaticResource LoginEntryStyle}"
+                                                  Completed="PasswordEntry_OnCompleted" />
+
+                            <!-- Hide or show password -->
+                            <Image x:Name="TogglePasswordVisibilityButton" 
+                               AbsoluteLayout.LayoutBounds="0.9,0.5,20,20"
+                               AbsoluteLayout.LayoutFlags="PositionProportional"
+                               Source="eye.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TogglePasswordVisibilityButton_OnTapped" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </AbsoluteLayout>
+                    </StackLayout>
+
+                    <!-- Confirm password -->
+                    <StackLayout Spacing="0">
+                        <Label Text="{extensions:Translate ConfirmPassword}" Style="{StaticResource LoginLabelStyle}" />
+                        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                            <elements:EntryWithBorder x:Name="ConfirmPasswordEntry"
+                                                  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                  AbsoluteLayout.LayoutFlags="All"
+                                                  IsPassword="True" 
+                                                  Style="{StaticResource LoginEntryStyle}" />
+
+                            <!-- Hide or show password -->
+                            <Image x:Name="ToggleConfirmPassword" 
+                               AbsoluteLayout.LayoutBounds="0.9,0.5,20,20"
+                               AbsoluteLayout.LayoutFlags="PositionProportional"
+                               Source="eye.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ToggleConfirmPassword_OnTapped" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </AbsoluteLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Error message -->
+                <Label TextColor="White"
+                   HorizontalOptions="Center"
+                   Text="{extensions:Translate CheckPasswordErrorMessage}" 
+                   IsVisible="{Binding IsValid, Converter={StaticResource InverseBooleanConverter}}" />
+                <!-- Submit button -->
+                <Button x:Name="SubmitButton" 
+                    Clicked="SubmitButton_OnClicked"
+                    VerticalOptions="EndAndExpand"
+                    Style="{StaticResource LoginButtonStyle}"
+                    Text="{extensions:Translate Register}" />
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label TextColor="White" Text="{extensions:Translate AlreadyHaveAccountQuestion}" />
+                    <elements1:ExtendedLabel TextColor="White" IsUnderlined="True" Text="{extensions:Translate Login}">
+                        <elements:ExtendedLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Login_OnTapped" NumberOfTapsRequired="1" />
+                        </elements:ExtendedLabel.GestureRecognizers>
+                    </elements1:ExtendedLabel>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

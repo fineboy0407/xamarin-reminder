@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.AchievementNoteCreatePage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="Date: " />
+                <DatePicker x:Name="DatePicker"
+                            MinimumDate="01/01/2018"
+                            MaximumDate="01/01/2100"
+                            Date="{x:Static sys:DateTime.Now}" />
+
+                <Label Text="Time spent: " />
+                <Entry x:Name="TimeSpentEditor" 
+                       Text="0" 
+                       Keyboard="Numeric"/>
+
+                <Label Text="{extensions:Translate Description}" />
+                <ScrollView>
+                    <Editor x:Name="DescriptionEditor"
+                            HeightRequest="200"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <Button x:Name="SubmitButton"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource SubmitButtonStyle}"
+                            Text="{extensions:Translate Add}"
+                            Clicked="SubmitButton_OnClicked" />
+
+                    <Button x:Name="CancelButton"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource CancelButtonStyle}"
+                            Text="{extensions:Translate Cancel}"
+                            Clicked="CancelButton_OnClicked" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

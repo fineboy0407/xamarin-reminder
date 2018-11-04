@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.AchievementNoteEditPage"
+             Title="Edit note"
+             BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="delete.png" Clicked="Delete_OnClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label Text="Date: " />
+                <DatePicker x:Name="DatePicker"
+                            MinimumDate="01/01/2018"
+                            MaximumDate="01/01/2100"
+                            Date="{Binding Date}" />
+
+                <Label Text="{extensions:Translate TimeSpent}" />
+                <Entry x:Name="TimeSpentEditor" 
+                       Text="{Binding HoursSpent}" 
+                       Keyboard="Numeric" />
+
+                <Label Text="{extensions:Translate Description}" />
+                <ScrollView>
+                    <Editor x:Name="DescriptionEditor"
+                            HeightRequest="200"
+                            Text="{Binding Description}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <Button x:Name="SubmitButton"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{extensions:Translate Save}"
+                            Style="{StaticResource SubmitButtonStyle}"
+                            Clicked="SubmitButton_OnClicked" />
+
+                    <Button x:Name="CancelButton"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource CancelButtonStyle}"
+                            Text="{extensions:Translate Cancel}"
+                            Clicked="CancelButton_OnClicked" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

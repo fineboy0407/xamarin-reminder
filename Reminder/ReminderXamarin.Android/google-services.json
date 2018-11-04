@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "316039972239",
+    "firebase_url": "https://reminder-c2368.firebaseio.com",
+    "project_id": "reminder-c2368",
+    "storage_bucket": "reminder-c2368.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316039972239:android:142956efaed824d1",
+        "android_client_info": {
+          "package_name": "com.companyname.ReminderXamarin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316039972239-g334fdbb3cra2k0tbjpsu4lae3esjk0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeo1BdB4Xaul_8VI-zQj-oD_acrQyLLWc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

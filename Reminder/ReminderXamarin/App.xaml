@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ReminderXamarin.Converters"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="ReminderXamarin.App">
+	<Application.Resources>
+		<!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Color x:Key="DarkFont">#323232</Color>
+            <Color x:Key="AchievementPageBackground">#fafafa</Color>
+            <Color x:Key="SubmitButtonBackground">#448AFF</Color>
+            <Color x:Key="CancelButtonBackground">#FFADD8E6</Color>
+            <Color x:Key="CancelButtonText">#448AFF</Color>
+            <Color x:Key="DeleteButtonBackground">#FF5252</Color>
+            <!--<Color x:Key="RoundButtonBackground">#323232</Color>-->
+            <Color x:Key="RoundButtonBackground">#448AFF</Color>
+            <Color x:Key="FrameButtonBorder">#cdced2</Color>
+            <Color x:Key="FrameBackground">#cccccccc</Color>
+            <Color x:Key="ProfilePageTitleBackground">#323232</Color>
+            
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarTextColor" Value="#fafafa" />
+                <Setter Property="BarBackgroundColor" Value="#323232" />
+            </Style>
+
+            <!-- Images styles -->
+            <Style x:Key="UserImageStyle" TargetType="abstractions:CircleImage">
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+            
+            <!-- Buttons styles -->
+            <Style x:Key="SubmitButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SubmitButtonBackground}" />
+            </Style>
+            
+            <Style x:Key="ButtonWithImageStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource RoundButtonBackground}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+            
+            <Style x:Key="PinPageButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonWithImageStyle}">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="BorderWidth" Value="1" />
+            </Style>
+            
+            <Style x:Key="PinPageExitButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DeleteButtonBackground}" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="CornerRadius" Value="0" />
+            </Style>
+
+            <Style x:Key="LoginButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+                <Setter Property="Margin" Value="25, 0" />
+                <Setter Property="CornerRadius" Value="0" />
+            </Style>
+
+            <Style x:Key="ButtonDangerStyle" TargetType="Button" BasedOn="{StaticResource ButtonWithImageStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DeleteButtonBackground}" />
+            </Style>
+
+            <Style x:Key="CancelButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource CancelButtonBackground}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkFont}" />
+            </Style>
+            
+            <Style x:Key="FrameButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BorderColor" Value="{StaticResource FrameButtonBorder}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkFont}" />
+            </Style>
+            
+            <!-- Label styles -->
+            <Style x:Key="LoginLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="Margin" Value="25, 0" />
+            </Style>
+            
+            <Style x:Key="PinPageLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+            <!-- Entry styles -->
+            <Style x:Key="LoginEntryStyle" TargetType="elements:EntryWithBorder">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="Margin" Value="25, 0" />
+            </Style>
+            
+            <!-- Converters -->
+            <converters:NumberToBoolConverter x:Key="NumberToBoolConverter" />
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+            <converters:NullElementToBoolConverter x:Key="NullElementToBoolConverter" />
+            <converters:NullElementToImageSourceConverter x:Key="NullElementToImageSourceConverter" />
+            <converters:PriorityToImageConverter x:Key="PriorityToImageConverter" />
+            <converters:IntEnumConverter x:Key="IntEnumConverter" />
+            <converters:ByteToImageSourceConverter x:Key="ByteToImageSourceConverter" />
+            <converters:EmptyByteToImageSourceConverter x:Key="EmptyByteToImageSourceConverter" />
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:NumberToColorConverter x:Key="NumberToColorConverter" />
+            <converters:AchievementSpentTimePresentationConverter x:Key="SpentTimePresentationConverter" />
+        </ResourceDictionary>
+	</Application.Resources>
+</Application>

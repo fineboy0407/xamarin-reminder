@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.ToDoCreatePage"
+             Title="{extensions:Translate CreateToDo}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:ToDoViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <StackLayout Padding="10">
+                        <Label Text="{extensions:Translate Date}" />
+                        <DatePicker x:Name="DatePicker"
+                                    MinimumDate="01/01/2018"
+                                    MaximumDate="01/01/2100"
+                                    Date="{x:Static sys:DateTime.Now}" />
+
+                        <Label Text="{extensions:Translate Time}" />
+                        <TimePicker x:Name="TimePicker" Format="HH:mm" />
+
+                        <Label Text="{extensions:Translate Description}" />
+                        <Editor x:Name="DescriptionEditor"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+            <Button x:Name="CreateToDoButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="confirm.png"
+                    Clicked="Save_OnClicked" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

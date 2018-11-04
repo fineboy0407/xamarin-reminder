@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.UserProfilePage"
+             BackgroundColor="White"
+             Title="{extensions:Translate Profile}">
+    <ContentPage.Content>
+        <!-- Header with user name and photo -->
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <elements:BlurredImage x:Name="BackgroundImage"
+                                   Aspect="AspectFill"
+                                   AbsoluteLayout.LayoutBounds="0,0,1,100" 
+                                   AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional">
+                <elements:BlurredImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BackgroundImage_OnTapped" />
+                </elements:BlurredImage.GestureRecognizers>
+            </elements:BlurredImage>
+
+            <abstractions:CircleImage x:Name="UserProfileImage"
+                                      Aspect="AspectFill"
+                                      HorizontalOptions="Center"
+                                      VerticalOptions="Start"
+                                      HeightRequest="120"
+                                      WidthRequest="120"
+                                      AbsoluteLayout.LayoutBounds="0.5,40,120,120" 
+                                      AbsoluteLayout.LayoutFlags="XProportional"
+                                      Source="{Binding ImageContent, Converter={StaticResource EmptyByteToImageSourceConverter}}"
+                                      Style="{StaticResource UserImageStyle}">
+                <abstractions:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="UserProfileImage_OnTapped" NumberOfTapsRequired="1" />
+                </abstractions:CircleImage.GestureRecognizers>
+            </abstractions:CircleImage>
+
+            <Button x:Name="PickUserPhotoImage" 
+                    Image="edit.png" 
+                    AbsoluteLayout.LayoutBounds="0.6,120,50,50" 
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    AbsoluteLayout.LayoutFlags="XProportional"
+                    Clicked="EditUserProfilePhoto_OnTapped" />
+
+            <StackLayout x:Name="UserInfoLayout" 
+                         AbsoluteLayout.LayoutBounds="0.5,180,1,1"
+                         AbsoluteLayout.LayoutFlags="XProportional, SizeProportional">
+                <Label Text="{Binding UserName}" FontSize="Medium" HorizontalOptions="Center" />
+            </StackLayout>
+           
+            <!--<ScrollView AbsoluteLayout.LayoutBounds="0,100,1,1" AbsoluteLayout.LayoutFlags="XProportional, SizeProportional">
+                    --><!-- User information --><!--
+                    <Grid RowSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="{extensions:Translate Username}" />
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding UserName}" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="{extensions:Translate NotesCount}" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding NotesCount}" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="{extensions:Translate AchievementsCount}" />
+                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding AchievementsCount}" />
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="{extensions:Translate FriendsBirthdaysCount}" />
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding FriendBirthdaysCount}" />
+                    </Grid>
+            </ScrollView>-->
+
+            <Button x:Name="UpdateUserButton" 
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="confirm.png"
+                    IsVisible="False"
+                    Clicked="UpdateUserButton_OnClicked"
+                    Command="{Binding UpdateUserCommand}" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

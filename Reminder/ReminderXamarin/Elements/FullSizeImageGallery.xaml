@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+                 xmlns:elements1="clr-namespace:ReminderXamarin.Elements"
+                 x:Class="ReminderXamarin.Elements.FullSizeImageGallery">
+    <ContentPage.Content>
+        <StackLayout Spacing="5">
+            <!-- This stack layout contains image gallery view. You can customize template according to your needs. -->
+            <elements:GalleryView x:Name="GalleryView"
+                                  HorizontalOptions="FillAndExpand" 
+                                  VerticalOptions="CenterAndExpand" 
+                                  HeightRequest="500">
+                <elements:GalleryView.ItemTemplate>
+                    <DataTemplate>
+                        <elements1:PinchToZoomContainer>
+                            <elements1:PinchToZoomContainer.Content>
+                                <Image Source="{Binding Source}" 
+                                       HeightRequest="500"
+                                       Aspect="AspectFit" />
+                            </elements1:PinchToZoomContainer.Content>
+                        </elements1:PinchToZoomContainer>
+                    </DataTemplate>
+                </elements:GalleryView.ItemTemplate>
+            </elements:GalleryView>
+        </StackLayout>
+    </ContentPage.Content>
+</pages:PopupPage>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.AchievementDetailPage"
+             Title="{Binding Title}"
+             BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Icon="delete.png" Clicked="DeleteAchievement_OnClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+                <ListView x:Name="AchievementNotes"
+                      ItemsSource="{Binding AchievementNotes}"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshCommand="{Binding RefreshListCommand}"
+                      ItemSelected="AchievementNotes_OnItemSelected"
+                      SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="80">
+                                <ViewCell.ContextActions>
+                                    <MenuItem Icon="delete.png" IsDestructive="True" Clicked="Delete_OnClicked" CommandParameter="{Binding .}" />
+                                </ViewCell.ContextActions>
+                                <ViewCell.View>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <elements:ExtendedLabel Grid.Row="0"
+                                                               Lines="3"
+                                                               LineSpacing="1.0"
+                                                               Grid.Column="0" 
+                                                               Text="{Binding Description}" 
+                                                               FontSize="Small" 
+                                                               HorizontalOptions="Start" />
+                                        <Label Grid.Row="0"
+                                           Grid.Column="1" 
+                                           Text="{Binding HoursSpent}" 
+                                           WidthRequest="40"  
+                                           FontSize="Small"
+                                           HorizontalOptions="EndAndExpand" />
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <!-- Add achievement note button -->
+            <Button AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}" 
+                    Clicked="AddNoteButton_OnClicked" 
+                    Image="add.png" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

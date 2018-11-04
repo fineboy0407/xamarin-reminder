@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Elements.AddItemsToNoteContentView"
+             BackgroundColor="{StaticResource FrameBackground}">
+  <ContentView.Content>
+      <StackLayout BackgroundColor="Transparent"
+                   HorizontalOptions="Center"
+                   Padding="0,0,0,10"
+                   VerticalOptions="End">
+          <Frame CornerRadius="10" Padding="5">
+              <StackLayout Spacing="0">
+                  <Button x:Name="TakePhotoButton" 
+                          Style="{StaticResource FrameButtonStyle}"
+                          Clicked="TakePhotoButton_OnClicked"
+                          Text="{extensions:Translate TakePhoto}" />
+                  <Button x:Name="PickPhotoButton" 
+                          Style="{StaticResource FrameButtonStyle}"
+                          Clicked="PickPhotoButton_OnClicked"
+                          Text="{extensions:Translate PickPhoto}" />
+                </StackLayout>
+          </Frame>
+          <Button Clicked="CancelButton_OnClicked"
+                  Style="{StaticResource FrameButtonStyle}"
+                  Text="{extensions:Translate Close}" />
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

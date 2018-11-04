@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.AchievementCreatePage"
+             Title="{extensions:Translate CreateAchievement}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:AchievementViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
+                <Label Text="{extensions:Translate PickImageForAchievement}" />
+                <Label x:Name="FileNameLabel" IsVisible="False" />
+                <StackLayout Spacing="4">
+                    <abstractions:CircleImage x:Name="PreviewImage" 
+                                              Aspect="AspectFill"
+                                              HorizontalOptions="Center"
+                                              VerticalOptions="Start"
+                                              HeightRequest="120"
+                                              WidthRequest="120"
+                                              IsVisible="False" />
+                    <!-- Clicking on this icon will open selection of image for achievement -->
+                    <Image x:Name="EditUserProfilePhoto" 
+                           Source="edit.png" 
+                           WidthRequest="15"
+                           HeightRequest="15"
+                           HorizontalOptions="Center"
+                           BackgroundColor="LightBlue">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PickImage_OnTapped" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <Label Text="{extensions:Translate AchievementName}" HorizontalOptions="Start" />
+                <Entry x:Name="TitleEntry" HorizontalOptions="FillAndExpand" />
+
+                <Label Text="{extensions:Translate Description}" HorizontalOptions="Start" />
+                <Editor x:Name="DescriptionEditor"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <Button x:Name="AchievementCreateButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="confirm.png"
+                    Clicked="Save_OnClicked" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

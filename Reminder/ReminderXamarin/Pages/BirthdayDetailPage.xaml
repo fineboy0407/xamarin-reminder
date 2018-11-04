@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.BirthdayDetailPage"
+             Title="{Binding Name}"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="10" Spacing="10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Spacing="0">
+                    <abstractions:CircleImage x:Name="FriendPhoto"
+                                              Aspect="AspectFill"
+                                              HorizontalOptions="Center"
+                                              VerticalOptions="Start"
+                                              HeightRequest="120"
+                                              WidthRequest="120"
+                                              Source="{Binding ImageContent, Converter={StaticResource ByteToImageSourceConverter}}"
+                                              Style="{StaticResource UserImageStyle}">
+                        <abstractions:CircleImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FriendPhoto_OnTapped" NumberOfTapsRequired="1" />
+                        </abstractions:CircleImage.GestureRecognizers>
+                    </abstractions:CircleImage>
+
+                    <Image x:Name="PhotoPickerButton" 
+                           Source="edit.png" 
+                           WidthRequest="15"
+                           HeightRequest="15"
+                           HorizontalOptions="Center"
+                           BackgroundColor="LightBlue">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PhotoPickerButton_OnClicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <Label Text="{extensions:Translate EditBirthdayDate}" />
+                    <DatePicker x:Name="DatePicker"
+                                MinimumDate="01/01/2018"
+                                MaximumDate="01/01/2100" />
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <Label Text="{extensions:Translate EditName}" />
+                    <Entry x:Name="NameEntry" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <Label Text="{extensions:Translate EditPreferencesDescription}" HorizontalOptions="Start" />
+                    <Editor x:Name="GiftDescriptionEditor"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="200" />
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Confirm and delete buttons -->
+            <StackLayout AbsoluteLayout.LayoutBounds="0.95,1,100,150" AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Button Style="{StaticResource ButtonDangerStyle}" 
+                        HorizontalOptions="EndAndExpand" 
+                        Clicked="Delete_OnClicked" 
+                        Image="delete.png" />
+                <Button Style="{StaticResource ButtonWithImageStyle}" 
+                        HorizontalOptions="EndAndExpand" 
+                        Clicked="Confirm_OnClicked" 
+                        Image="confirm.png" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

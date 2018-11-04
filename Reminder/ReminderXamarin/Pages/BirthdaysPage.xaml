@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.BirthdaysPage"
+             Title="{extensions:Translate Birthdays}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:BirthdaysPageViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                         AbsoluteLayout.LayoutFlags="All" 
+                         Padding="10"
+                         Spacing="0" 
+                         VerticalOptions="FillAndExpand" 
+                         HorizontalOptions="FillAndExpand">
+                <ListView x:Name="FriendsList"
+                      ItemsSource="{Binding BirthdayViewModels}"
+                      IsPullToRefreshEnabled="True"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      RefreshCommand="{Binding RefreshListCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      ItemSelected="FriendsList_OnItemSelected"
+                      SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="120">
+                                <ViewCell.ContextActions>
+                                    <MenuItem Icon="delete.png" IsDestructive="True" Clicked="Delete_OnClicked" CommandParameter="{Binding .}" />
+                                </ViewCell.ContextActions>
+                                <StackLayout BackgroundColor="White">
+                                    <elements:ContentViewWithBorder HorizontalOptions="FillAndExpand" 
+                                                                VerticalOptions="FillAndExpand" 
+                                                                Padding="10" 
+                                                                BorderColor="DarkGray" 
+                                                                BorderWidth="1">
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="3*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="2*" />
+                                            </Grid.RowDefinitions>
+
+                                            <abstractions:CircleImage Source="{Binding ImageContent, Converter={StaticResource ByteToImageSourceConverter}}"
+                                                                  Aspect="AspectFill"
+                                                                  Grid.Column="0"
+                                                                  Grid.RowSpan="2"
+                                                                  VerticalOptions="Center"
+                                                                  HorizontalOptions="Start"
+                                                                  HeightRequest="90"
+                                                                  WidthRequest="90" />
+
+                                            <StackLayout Orientation="Horizontal" 
+                                                         Spacing="0"
+                                                         Grid.Column="1"
+                                                         Grid.Row="0">
+                                                <Label Text="{Binding Title}" FontSize="Medium" />
+                                            </StackLayout>
+
+                                            <elements:ExtendedLabel HorizontalTextAlignment="Start" 
+                                                                   Lines="3"
+                                                                   LineBreakMode="TailTruncation" 
+                                                                   Grid.Column="1"
+                                                                   Grid.Row="1"
+                                                                   LineSpacing="1.1" 
+                                                                   Text="{Binding GiftDescription}"
+                                                                   VerticalOptions="Start" />
+
+                                        </Grid>
+
+                                    </elements:ContentViewWithBorder>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Button x:Name="AddFriendButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="add.png"
+                    Clicked="AddFriendButton_OnClicked" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

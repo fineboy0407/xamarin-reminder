@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.ToDoHighPriorityPage"
+             Title="{extensions:Translate High}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:ToDoPageViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="10"
+                     Spacing="0" 
+                     AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                     AbsoluteLayout.LayoutFlags="All" 
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+                <ListView x:Name="ToDoList"
+                      ItemsSource="{Binding HighPriorityModels}"
+                      IsPullToRefreshEnabled="True"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      RefreshCommand="{Binding RefreshListCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      ItemSelected="ToDoList_OnItemSelected"
+                      SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="60">
+                                <ViewCell.ContextActions>
+                                    <MenuItem Icon="delete.png" IsDestructive="True" Clicked="Delete_OnClicked" CommandParameter="{Binding .}" />
+                                </ViewCell.ContextActions>
+                                <StackLayout BackgroundColor="White">
+                                    <elements:ContentViewWithBorder HorizontalOptions="FillAndExpand" 
+                                                                 VerticalOptions="FillAndExpand" 
+                                                                 Padding="10" 
+                                                                 BorderColor="DarkGray" 
+                                                                 BorderWidth="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <elements:ExtendedLabel Text="{Binding WhenHappens, StringFormat='{0:dd.MM.yy HH:mm}'}" 
+                                                                   VerticalOptions="Center"
+                                                                   Grid.Row="0"
+                                                                   Grid.Column="0" />
+
+                                            <elements:ExtendedLabel Lines="2"
+                                                                   LineSpacing="1.1" 
+                                                                   Grid.Row="0"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   Grid.Column="1"
+                                                                   Text="{Binding Description}"
+                                                                   VerticalOptions="Center" />
+                                        </Grid>
+                                    </elements:ContentViewWithBorder>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Button x:Name="CreateToDoButton"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource ButtonWithImageStyle}"
+                    Image="add.png"
+                    Clicked="CreateToDoButton_OnClicked" />
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

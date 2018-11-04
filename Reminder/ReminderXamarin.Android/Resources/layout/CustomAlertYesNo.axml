@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    android:paddingTop="30dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="30dp"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:id="@+id/yesNoText"
+            android:text="Do you really want to delete this image?"
+            android:textSize="16sp"
+            android:minLines="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#302f2f"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/yesNoApplyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Yes"
+            android:background="@color/deleteButtonBackground"
+            android:textAllCaps="false"
+            android:layout_gravity="bottom"
+            android:textColor="#fafafa" />
+        <Button
+            android:id="@+id/yesNoRejectButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="No"
+            android:background="@android:color/white"
+            android:textAllCaps="false"
+            android:layout_gravity="bottom"
+            android:textColor="#000000" />
+    </LinearLayout>
+</LinearLayout>

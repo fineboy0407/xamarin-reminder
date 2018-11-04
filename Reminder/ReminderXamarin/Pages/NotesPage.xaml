@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels1="clr-namespace:ReminderXamarin.ViewModels;assembly=ReminderXamarin"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.NotesPage"
+             Title="{extensions:Translate AllNotes}"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels1:NotesPageViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+
+    <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout Padding="10" 
+                     AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Spacing="0" 
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+            <!-- Search bar with border -->
+            <elements:ContentViewWithBorder BorderColor="Gray">
+                <SearchBar x:Name="SearchBar" 
+                       BackgroundColor="White"
+                       Placeholder="Search..." 
+                       TextChanged="SearchBar_OnTextChanged" />
+            </elements:ContentViewWithBorder>
+            <!-- List with notes -->
+            <ListView x:Name="NotesList" 
+                      ItemsSource="{Binding NotesGroups}"
+                      IsGroupingEnabled="True"
+                      IsPullToRefreshEnabled="True"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      RefreshCommand="{Binding RefreshListCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      ItemSelected="NotesList_OnItemSelected"
+                      SeparatorVisibility="None">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Title}" TextColor="{StaticResource DarkFont}" />
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Icon="delete.png" IsDestructive="True" Clicked="Delete_OnClicked" CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                            <StackLayout BackgroundColor="White" Margin="0,5">
+                                <elements:ContentViewWithBorder HorizontalOptions="FillAndExpand" 
+                                                                CornerRadius="20"
+                                                                VerticalOptions="FillAndExpand" 
+                                                                Padding="0,20,0,10" 
+                                                                BorderColor="DarkGray" 
+                                                                BorderWidth="1">
+                                    <StackLayout>
+                                        <Image Source="{Binding Photos, Converter={StaticResource NullElementToImageSourceConverter}}" 
+                                               IsVisible="{Binding Photos, Converter={StaticResource NullElementToBoolConverter}}" 
+                                               Aspect="AspectFill" 
+                                               HorizontalOptions="FillAndExpand"
+                                               HeightRequest="200" />
+                                        <StackLayout Spacing="10" Padding="10,0">
+                                            <Label Text="{Binding CreationDate, StringFormat='{0:dd.MM.yy, HH:mm}'}" />
+                                            <elements:ExtendedLabel HorizontalTextAlignment="Start" 
+                                                                   Lines="3" 
+                                                                   LineSpacing="1.1" 
+                                                                   LineBreakMode="TailTruncation" 
+                                                                   Text="{Binding Description}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </elements:ContentViewWithBorder>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+        <Button x:Name="CreateNoteButton"
+                AbsoluteLayout.LayoutBounds="0.95,0.95,60,60" 
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Style="{StaticResource ButtonWithImageStyle}"
+                Image="add.png"
+                Clicked="CreateNoteButton_OnClicked" />
+    </AbsoluteLayout>
+</ContentPage>

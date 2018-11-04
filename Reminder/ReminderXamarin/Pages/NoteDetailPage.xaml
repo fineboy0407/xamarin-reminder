@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.NoteDetailPage"
+             BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="delete.png" Order="Primary" Clicked="Delete_OnClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <!-- Image gallery and note text container -->
+            <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <!-- Image gallery with all photos of current note. Visible if note contains not empty photo -->
+                <elements:HorizontalImageGallery x:Name="ImageGallery" 
+                                              Orientation="Horizontal" 
+                                              ItemsSource="{Binding Photos}"
+                                              HeightRequest="120"
+                                              IsVisible="{Binding Photos, Converter={StaticResource NullElementToBoolConverter}}">
+                    <elements:HorizontalImageGallery.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <AbsoluteLayout x:Name="ImageViewLayout" Padding="2" HeightRequest="120" WidthRequest="120">
+                                        <Image Source="{Binding ResizedPath}"
+                                               Aspect="AspectFill" 
+                                               HeightRequest="120" 
+                                               WidthRequest="120" 
+                                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                               AbsoluteLayout.LayoutFlags="All">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="HorizontalImageGallery_OnItemTapped" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </AbsoluteLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </elements:HorizontalImageGallery.ItemTemplate>
+                </elements:HorizontalImageGallery>
+
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <Editor x:Name="DescriptionEditor"
+                        TextChanged="DescriptionEditor_OnTextChanged"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="200" />
+                </ScrollView>
+
+                <Grid AbsoluteLayout.LayoutBounds="0,1,1,60" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!-- Click on this button will open frame with buttons that will allow to add items to note -->
+                    <Button x:Name="AddButton"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource ButtonWithImageStyle}"
+                            Image="add.png"
+                            Clicked="AddButton_OnClicked" />
+
+                    <!-- Confirm changes -->
+                    <Button x:Name="ConfirmButton" 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource ButtonWithImageStyle}" 
+                            Clicked="Confirm_OnClicked" 
+                            Image="confirm.png" />
+                </Grid>
+            </StackLayout>
+
+            <ActivityIndicator x:Name="ActivityIndicator"
+                               IsRunning="{Binding IsLoading}"
+                               AbsoluteLayout.LayoutBounds="0.5,0.5,50,50" 
+                               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <elements:AddItemsToNoteContentView x:Name="AddItemsToNoteContentView" 
+                                                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                AbsoluteLayout.LayoutFlags="All"
+                                                PickPhotoButtonClicked="AddItemsToNoteContentView_OnPickPhotoButtonClicked"
+                                                TakePhotoButtonClicked="AddItemsToNoteContentView_OnTakePhotoButtonClicked"
+                                                IsVisible="False" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

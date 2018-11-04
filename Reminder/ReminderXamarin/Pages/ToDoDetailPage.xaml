@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:elements="clr-namespace:ReminderXamarin.Elements;assembly=ReminderXamarin"
+             xmlns:extensions="clr-namespace:ReminderXamarin.Extensions;assembly=ReminderXamarin"
+             x:Class="ReminderXamarin.Pages.ToDoDetailPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Label Text="{extensions:Translate Priority}" />
+                <elements:CustomPickerWithIcon x:Name="PriorityPicker"
+                                               ItemsSource="{Binding AvailablePriorities}"
+                                               SelectedIndex="{Binding Priority, Converter={StaticResource IntEnumConverter}}" />
+
+                <Label Text="{extensions:Translate Date}" />
+                <DatePicker x:Name="DatePicker"
+                            MinimumDate="01/01/2018"
+                            MaximumDate="01/01/2100"
+                            Date="{Binding WhenHappens}" />
+
+                <Label Text="{extensions:Translate Time}" />
+                <TimePicker x:Name="TimePicker" Format="HH:mm" />
+
+                <Label Text="{extensions:Translate Description}" />
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <Editor x:Name="DescriptionEditor"
+                            Margin="0,0,70,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                </ScrollView>
+            </StackLayout>
+
+            <!-- Confirm and delete buttons -->
+            <StackLayout AbsoluteLayout.LayoutBounds="0.95,1,100,150" AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Button Style="{StaticResource ButtonDangerStyle}" 
+                        HorizontalOptions="EndAndExpand" 
+                        Clicked="Delete_OnClicked" 
+                        Image="delete.png" />
+                <Button Style="{StaticResource ButtonWithImageStyle}" 
+                        HorizontalOptions="EndAndExpand" 
+                        Clicked="Confirm_OnClicked" 
+                        Image="confirm.png" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
