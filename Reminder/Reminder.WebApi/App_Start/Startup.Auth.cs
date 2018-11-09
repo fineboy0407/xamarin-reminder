@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Reminder.WebApi.Providers;
@@ -12,6 +13,7 @@ namespace Reminder.WebApi
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        public static GoogleOAuth2AuthenticationOptions GoogleAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
 
@@ -55,11 +57,12 @@ namespace Reminder.WebApi
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+            {
+                ClientId = "316039972239-drslag4sqs8ld9labhk85mr1a72mnnl8.apps.googleusercontent.com",
+                ClientSecret = "e3GLlj_OMHwDuXcg4TclH2LA"
+            });
+            app.UseGoogleAuthentication(GoogleAuthOptions);
         }
     }
 }
