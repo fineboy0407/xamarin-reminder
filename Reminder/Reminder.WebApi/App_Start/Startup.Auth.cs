@@ -57,11 +57,12 @@ namespace Reminder.WebApi
             //    appId: "",
             //    appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+            GoogleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "316039972239-drslag4sqs8ld9labhk85mr1a72mnnl8.apps.googleusercontent.com",
-                ClientSecret = "e3GLlj_OMHwDuXcg4TclH2LA"
-            });
+                ClientSecret = "e3GLlj_OMHwDuXcg4TclH2LA",
+                Provider = new GoogleAuthProvider()
+            };
             app.UseGoogleAuthentication(GoogleAuthOptions);
         }
     }
