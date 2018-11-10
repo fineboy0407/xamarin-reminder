@@ -29,11 +29,31 @@
     </div>
     
     <div class="form-group">
-        <label>User name</label>
+        <label>Password</label>
         <input type="password" class="form-control" id="password" />
     </div>
     
     <input type="button" id="submitLogin" class="btn btn-primary" value="Login" />
+</div>
+
+<div class="container" id="registerform">
+    <h2>Register</h2>
+    <div class="form-group">
+        <label>User name</label>
+        <input type="text" class="form-control" id="registerUsername" />
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" id="registerPassword" />
+    </div>
+
+    <div class="form-group">
+        <label>Confirm password</label>
+        <input type="password" class="form-control" id="confirmPassword" />
+    </div>
+
+    <input type="button" id="submitRegister" class="btn btn-success" value="Register" />
 </div>
 
 @section scripts{
@@ -54,15 +74,16 @@
                     url: '/Token',
                     data: loginData,
                     success: function (result) {
-                        $('.userName').text(data.userName);
+                        $('.userName').text(result.userName);
                         $('.userInfo').css('display', 'block');
                         $('.loginForm').css('display', 'none');
                         // save access token to session storage
                         sessionStorage.setItem(tokenKey, result.access_token);
                         console.log(result.access_token);
+                        alert("Login successful");
                     },
-                    error: function (data) {
-                        alert(data.error);
+                    error: function (result) {
+                        alert(result.error);
                     }
                 });
             });
@@ -74,23 +95,25 @@
             });
 
             // Register
-            $('#submit').click(function(e) {
+            $('#submitRegister').click(function(e) {
                 e.preventDefault();
                 var data = {
-                    Email: $('#email').val(),
-                    Password: $('#password').val(),
-                    ConfirmPassword: $('#confirmpassword').val()
+                    Email: $('#registerUsername').val(),
+                    Password: $('#registerPassword').val(),
+                    ConfirmPassword: $('#confirmPassword').val()
                 };
 
                 $.ajax({
                     type: 'POST',
                     url: '/api/Account/Register',
                     contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data)
-                }).success(function(data) {
-                    alert("Register successful");
-                }).fail(function(data) {
-                    alert("Error during register");
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        alert("Registration successful");
+                    },
+                    error: function (result) {
+                        alert("Registration error");
+                    }
                 });
             });
         });
