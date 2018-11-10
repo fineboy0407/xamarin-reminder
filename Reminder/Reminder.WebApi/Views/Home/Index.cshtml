@@ -1,5 +1,8 @@
-﻿<!-- Alerts -->
-@Html.ActionLink("Login", "Login")
+﻿<div class="header" style="padding-top: 0;">
+    <div class="container">
+        @Html.ActionLink("Login", "Login", "Home", new { @class = "button button-info" })
+    </div>
+</div>
 
 @section scripts{
     <script type="text/javascript">
