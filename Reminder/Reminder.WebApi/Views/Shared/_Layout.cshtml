@@ -27,6 +27,11 @@
         </div>
     </div>
     <div class="container body-content">
+        <!-- User name and logout button -->
+        <div class="container" id="loginSuccessPanel" style="display: none;">
+            <p>You entered as <span id="userName"></span></p>
+            <input type="button" class="btn btn-default" value="Logout" id="logOut" />
+        </div>
         @RenderBody()
         <hr />
         <footer>

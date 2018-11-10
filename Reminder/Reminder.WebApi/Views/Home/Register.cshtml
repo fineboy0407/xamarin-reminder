@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="alert alert-success fade in" id="registerSuccessAlert" role="alert" style="display: none;">
+    <strong>Register successful</strong>
+</div>
+<div class="alert alert-danger fade in" id="registerFailedAlert" role="alert" style="display: none;">
+    <strong>Register failed</strong>
+</div>
+
+<!-- Register form -->
+<div class="container" id="registerform" style="display: none;">
+    <h2>Register</h2>
+    <div class="form-group">
+        <label>User name</label>
+        <input type="text" class="form-control" id="registerUsername" />
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" id="registerPassword" />
+    </div>
+
+    <div class="form-group">
+        <label>Confirm password</label>
+        <input type="password" class="form-control" id="confirmPassword" />
+    </div>
+
+    <input type="button" id="submitRegister" class="btn btn-success" value="Register" />
+    <p>Already have an account? @Html.ActionLink("Login", "Login")</p>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Register
+            $("#submitRegister").click(function (e) {
+                e.preventDefault();
+                var data = {
+                    Email: $("#registerUsername").val(),
+                    Password: $("#registerPassword").val(),
+                    ConfirmPassword: $("#confirmPassword").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Account/Register",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    success: function () {
+                        window.location.href = "@Url.Action("Login","Home")";
+                        $("#registerSuccessAlert").css("display", "block");
+                        setTimeout("$('#registerSuccessAlert').css('display', 'none');", 3000);
+                    },
+                    error: function () {
+                        $("#registerFailedAlert").css("display", "block");
+                        setTimeout("$('#registerFailedAlert').css('display', 'none');", 3000);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,121 +1,17 @@
-﻿<div class="container" id="loginSuccessPanel" style="display: none;">
-    <p>You entered as <span class="userName"></span></p>
-    <input type="button" class="btn btn-default" value="Logout" id="logOut" />
-</div>
-
-<div class="container" id="loginform">
-    <h2>Login</h2>
-    <div class="form-group">
-        <label>User name</label>
-        <input type="text" class="form-control" id="username" />
-    </div>
-
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" id="password" />
-    </div>
-
-    <input type="button" id="submitLogin" class="btn btn-primary" value="Login" />
-    <p>Don't have an account? <a id="registerLink" href="#">Register</a></p>
-</div>
-
-<div class="container" id="registerform" style="display: none;">
-    <h2>Register</h2>
-    <div class="form-group">
-        <label>User name</label>
-        <input type="text" class="form-control" id="registerUsername" />
-    </div>
-
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" id="registerPassword" />
-    </div>
-
-    <div class="form-group">
-        <label>Confirm password</label>
-        <input type="password" class="form-control" id="confirmPassword" />
-    </div>
-
-    <input type="button" id="submitRegister" class="btn btn-success" value="Register" />
-    <p>Already have an account? <a id="loginLink" href="#">Login</a></p>
-</div>
+﻿<!-- Alerts -->
+@Html.ActionLink("Login", "Login")
 
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            // Register link clicked
-            $("#registerLink").click(function(e) {
-                e.preventDefault();
-                $("#loginform").css("display", "none");
-                $("#registerform").css("display", "block");
-            });
-
-            // Login link clicked
-            $("#loginLink").click(function(e) {
-                e.preventDefault();
-                $("#registerform").css("display", "none");
-                $("#loginform").css("display", "block");
-            });
-
-            // Login to app
             var tokenKey = "tokenInfo";
-            $("#submitLogin").click(function (e) {
-                e.preventDefault();
-                var loginData = {
-                    grant_type: 'password',
-                    username: $("#username").val(),
-                    password: $("#password").val()
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/Token',
-                    data: loginData,
-                    success: function (result) {
-                        $(".userName").text(result.userName);
-                        $(".userInfo").css("display", "block");
-                        $(".loginForm").css("display", "none");
-                        // save access token to session storage
-                        sessionStorage.setItem(tokenKey, result.access_token);
-                        $("#loginSuccessPanel").css("display", "block");
-                        $(".userName").html(result.userName);
-                        alert("Login successful");
-                    },
-                    error: function (result) {
-                        alert(result.error);
-                    }
-                });
-            });
 
             // Logout
             $("#logOut").click(function(e) {
                 e.preventDefault();
                 $("#loginSuccessPanel").css("display", "none");
-                $(".userName").html("");
+                $("#userName").html("");
                 sessionStorage.removeItem(tokenKey);
-            });
-
-            // Register
-            $("#submitRegister").click(function(e) {
-                e.preventDefault();
-                var data = {
-                    Email: $("#registerUsername").val(),
-                    Password: $("#registerPassword").val(),
-                    ConfirmPassword: $("#confirmPassword").val()
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "/api/Account/Register",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(data),
-                    success: function (result) {
-                        alert("Registration successful");
-                    },
-                    error: function (result) {
-                        alert("Registration error");
-                    }
-                });
             });
         });
     </script>
