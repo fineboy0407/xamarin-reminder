@@ -1,22 +1,4 @@
-﻿@*<div>
-    <label>Введите email</label><br />
-    <input type="email" id="email" /> <br /><br />
-    <label>Введите пароль</label><br />
-    <input type="password" id="password" /><br /><br />
-    <label>Подтвердите пароль</label><br />
-    <input type="password" id="confirmpassword" /><br /><br />
-    <input type="submit" id="submit" value="Регистрация" />
-</div>*@
-
-@*<div class="loginForm">
-    <h3>Вход на сайт</h3>
-    <label>Введите email</label><br />
-    <input type="email" id="emailLogin" /> <br /><br />
-    <label>Введите пароль</label><br />
-    <input type="password" id="passwordLogin" /><br /><br />
-    <input type="submit" id="submitLogin" value="Логин" />
-</div>*@
-<div class="container" style="display: none;">
+﻿<div class="container" id="loginSuccessPanel" style="display: none;">
     <p>You entered as <span class="userName"></span></p>
     <input type="button" class="btn btn-default" value="Logout" id="logOut" />
 </div>
@@ -77,12 +59,12 @@
 
             // Login to app
             var tokenKey = "tokenInfo";
-            $('#submitLogin').click(function (e) {
+            $("#submitLogin").click(function (e) {
                 e.preventDefault();
                 var loginData = {
                     grant_type: 'password',
-                    username: $('#username').val(),
-                    password: $('#password').val()
+                    username: $("#username").val(),
+                    password: $("#password").val()
                 };
 
                 $.ajax({
@@ -90,12 +72,13 @@
                     url: '/Token',
                     data: loginData,
                     success: function (result) {
-                        $('.userName').text(result.userName);
-                        $('.userInfo').css('display', 'block');
-                        $('.loginForm').css('display', 'none');
+                        $(".userName").text(result.userName);
+                        $(".userInfo").css("display", "block");
+                        $(".loginForm").css("display", "none");
                         // save access token to session storage
                         sessionStorage.setItem(tokenKey, result.access_token);
-                        console.log(result.access_token);
+                        $("#loginSuccessPanel").css("display", "block");
+                        $(".userName").html(result.userName);
                         alert("Login successful");
                     },
                     error: function (result) {
@@ -105,24 +88,26 @@
             });
 
             // Logout
-            $('#logOut').click(function(e) {
+            $("#logOut").click(function(e) {
                 e.preventDefault();
+                $("#loginSuccessPanel").css("display", "none");
+                $(".userName").html("");
                 sessionStorage.removeItem(tokenKey);
             });
 
             // Register
-            $('#submitRegister').click(function(e) {
+            $("#submitRegister").click(function(e) {
                 e.preventDefault();
                 var data = {
-                    Email: $('#registerUsername').val(),
-                    Password: $('#registerPassword').val(),
-                    ConfirmPassword: $('#confirmPassword').val()
+                    Email: $("#registerUsername").val(),
+                    Password: $("#registerPassword").val(),
+                    ConfirmPassword: $("#confirmPassword").val()
                 };
 
                 $.ajax({
-                    type: 'POST',
-                    url: '/api/Account/Register',
-                    contentType: 'application/json; charset=utf-8',
+                    type: "POST",
+                    url: "/api/Account/Register",
+                    contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(data),
                     success: function (result) {
                         alert("Registration successful");
