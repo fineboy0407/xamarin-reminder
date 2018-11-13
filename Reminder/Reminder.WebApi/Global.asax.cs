@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Reminder.WebApi.Util;
 
 namespace Reminder.WebApi
 {
@@ -9,6 +10,8 @@ namespace Reminder.WebApi
     {
         protected void Application_Start()
         {
+            AutofacConfig.ConfigureContainer();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

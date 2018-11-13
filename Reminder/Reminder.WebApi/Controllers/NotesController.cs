@@ -7,7 +7,6 @@ using Reminder.Data.Entities;
 
 namespace Reminder.WebApi.Controllers
 {
-    [Authorize]
     public class NotesController : ApiController
     {
         private readonly IRepository<Note> _noteRepository;
@@ -17,7 +16,7 @@ namespace Reminder.WebApi.Controllers
             _noteRepository = noteRepository;
         }
 
-        public IEnumerable<Note> GetNotes()
+        public IEnumerable<Note> Get()
         {
             return _noteRepository.GetAll().ToList();
         }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Reminder.Data.Abstract;
 using Reminder.Data.Entities;
 
-namespace Reminder.Data
+namespace Reminder.Data.Concrete
 {
-    public class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity> : IRepository<TEntity>, IDisposable
         where TEntity : Entity
     {
         private readonly DbContext _dbContext;

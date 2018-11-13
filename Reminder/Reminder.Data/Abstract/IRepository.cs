@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Reminder.Data.Entities;
 
@@ -9,7 +8,7 @@ namespace Reminder.Data.Abstract
     /// Provide CRUD functionality of the <see cref="Entity"/> items.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IRepository<TEntity> : IDisposable
+    public interface IRepository<TEntity>
         where TEntity : Entity
     {
         /// <summary>
