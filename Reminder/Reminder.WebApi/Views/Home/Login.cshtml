@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "Login";
-}
-
-<div class="alert alert-success fade in" id="loginSuccessAlert" role="alert" style="display: none;">
+﻿<div class="alert alert-success fade in" id="loginSuccessAlert" role="alert" style="display: none;">
     <strong>Login successful</strong>
 </div>
 <div class="alert alert-danger fade in" id="loginFailedAlert" role="alert" style="display: none;">
@@ -11,58 +6,18 @@
 </div>
 
 <!-- Login form -->
-<div class="container" id="loginform">
+<div id="loginform">
     <h2>Login</h2>
-    <div class="form-group">
-        <label>User name</label>
-        <input type="text" class="form-control" id="username" />
+    <hr/>
+    <div>
+        <label for="username">User name</label>
+        <input type="text" class="form-control input-control" id="username" />
     </div>
 
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" id="password" />
+    <div>
+        <label for="password">Password</label>
+        <input type="password" class="form-control input-control" id="password" />
     </div>
 
-    <input type="button" id="submitLogin" class="btn btn-primary" value="Login" />
-    <p>Don't have an account? @Html.ActionLink("Register", "Register")</p>
+    <input type="button" id="submitLogin" class="button button-info" value="Login" />
 </div>
-
-@section scripts{
-<script type="text/javascript">
-        $(document).ready(function () {
-            // Login to app
-            var tokenKey = "tokenInfo";
-            $("#submitLogin").click(function (e) {
-                e.preventDefault();
-                var loginData = {
-                    grant_type: 'password',
-                    username: $("#username").val(),
-                    password: $("#password").val()
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/Token',
-                    data: loginData,
-                    success: function (result) {
-                        $(".userName").text(result.userName);
-                        $(".userInfo").css("display", "block");
-                        $(".loginForm").css("display", "none");
-                        // save access token to session storage
-                        sessionStorage.setItem(tokenKey, result.access_token);
-                        $("#loginSuccessPanel").css("display", "block");
-                        $("#userName").html(result.userName);
-
-                        window.location.href = "@Url.Action("Index","Home")";
-                        $("#loginSuccessAlert").css("display", "block");
-                        setTimeout("$('#loginSuccessAlert').css('display', 'none');", 3000);
-                    },
-                    error: function () {
-                        $("#loginFailedAlert").css("display", "block");
-                        setTimeout("$('#loginFailedAlert').css('display', 'none');", 3000);
-                    }
-                });
-            });
-        });
-</script>
-}

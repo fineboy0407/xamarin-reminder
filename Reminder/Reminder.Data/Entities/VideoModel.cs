@@ -2,7 +2,7 @@
 {
     public class VideoModel : Entity
     {
-        public string Path { get; set; }
+        public byte[] Content { get; set; }
 
         public int NoteId { get; set; }
         public Note Note { get; set; }

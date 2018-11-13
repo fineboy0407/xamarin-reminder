@@ -18,11 +18,11 @@ namespace Reminder.Migrations.Migrations
                         AchievementId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AchievementModels", t => t.AchievementId, cascadeDelete: true)
+                .ForeignKey("dbo.Achievements", t => t.AchievementId, cascadeDelete: true)
                 .Index(t => t.AchievementId);
             
             CreateTable(
-                "dbo.AchievementModels",
+                "dbo.Achievements",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -58,7 +58,7 @@ namespace Reminder.Migrations.Migrations
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.BirthdayModels",
+                "dbo.Birthdays",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -112,13 +112,12 @@ namespace Reminder.Migrations.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.PhotoModels",
+                "dbo.Photos",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ResizedPath = c.String(),
-                        Thumbnail = c.String(),
-                        Landscape = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        Image = c.Binary(),
                         NoteId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -126,11 +125,11 @@ namespace Reminder.Migrations.Migrations
                 .Index(t => t.NoteId);
             
             CreateTable(
-                "dbo.VideoModels",
+                "dbo.Videos",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Path = c.String(),
+                        Content = c.Binary(),
                         NoteId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -181,38 +180,38 @@ namespace Reminder.Migrations.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.ToDoModels", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.VideoModels", "NoteId", "dbo.Notes");
+            DropForeignKey("dbo.Videos", "NoteId", "dbo.Notes");
             DropForeignKey("dbo.Notes", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.PhotoModels", "NoteId", "dbo.Notes");
+            DropForeignKey("dbo.Photos", "NoteId", "dbo.Notes");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.BirthdayModels", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AchievementModels", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AchievementNotes", "AchievementId", "dbo.AchievementModels");
+            DropForeignKey("dbo.Birthdays", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Achievements", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AchievementNotes", "AchievementId", "dbo.Achievements");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.ToDoModels", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.VideoModels", new[] { "NoteId" });
-            DropIndex("dbo.PhotoModels", new[] { "NoteId" });
+            DropIndex("dbo.Videos", new[] { "NoteId" });
+            DropIndex("dbo.Photos", new[] { "NoteId" });
             DropIndex("dbo.Notes", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.BirthdayModels", new[] { "UserId" });
+            DropIndex("dbo.Birthdays", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AchievementModels", new[] { "UserId" });
+            DropIndex("dbo.Achievements", new[] { "UserId" });
             DropIndex("dbo.AchievementNotes", new[] { "AchievementId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ToDoModels");
             DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.VideoModels");
-            DropTable("dbo.PhotoModels");
+            DropTable("dbo.Videos");
+            DropTable("dbo.Photos");
             DropTable("dbo.Notes");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.BirthdayModels");
+            DropTable("dbo.Birthdays");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.AchievementModels");
+            DropTable("dbo.Achievements");
             DropTable("dbo.AchievementNotes");
         }
     }

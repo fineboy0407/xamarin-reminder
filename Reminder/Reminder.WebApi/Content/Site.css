@@ -6,7 +6,7 @@
 .header {
     background-size: cover;
     height: 100vh;
-    background: url(../Content/Images/mainpage_background.jpg) fixed no-repeat center;
+    background: url('Images/mainpage_background.jpg') fixed no-repeat center;
     background-size: 100%;
     color: white;
     text-align: center;
@@ -136,4 +136,19 @@
 .button:disabled {
     background-color: #e7e7e7;
     cursor: not-allowed
+}
+
+/* Input fields styles */
+.input-control {
+    background: transparent;
+    color: white;
+    max-width: 250px;
+    border-radius: 0;
+    height: 50px;
+}
+
+/* Horizontal line style */
+hr {
+    max-width: 250px;
+    margin-left: 0;
 }

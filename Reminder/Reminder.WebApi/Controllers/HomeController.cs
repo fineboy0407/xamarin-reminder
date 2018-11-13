@@ -13,13 +13,13 @@ namespace Reminder.WebApi.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return PartialView();
         }
     }
 }

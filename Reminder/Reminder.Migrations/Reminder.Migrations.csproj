@@ -57,13 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext.cs" />
-    <Compile Include="Migrations\201810151355310_Initial.cs" />
-    <Compile Include="Migrations\201810151355310_Initial.Designer.cs">
-      <DependentUpon>201810151355310_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810151358593_TableNamesFix.cs" />
-    <Compile Include="Migrations\201810151358593_TableNamesFix.Designer.cs">
-      <DependentUpon>201810151358593_TableNamesFix.cs</DependentUpon>
+    <Compile Include="Migrations\201811131404069_Initial.cs" />
+    <Compile Include="Migrations\201811131404069_Initial.Designer.cs">
+      <DependentUpon>201811131404069_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -74,18 +70,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810151355310_Initial.resx">
-      <DependentUpon>201810151355310_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810151358593_TableNamesFix.resx">
-      <DependentUpon>201810151358593_TableNamesFix.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Reminder.Data\Reminder.Data.csproj">
       <Project>{56e7074c-7805-474d-9668-788971d33502}</Project>
       <Name>Reminder.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811131404069_Initial.resx">
+      <DependentUpon>201811131404069_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,44 @@
 ﻿<div class="header" style="padding-top: 0;">
     <div class="container">
-        @Html.ActionLink("Login", "Login", "Home", new { @class = "button button-info" })
+        @Html.Partial("Login")
     </div>
 </div>
 
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            // Login to app
             var tokenKey = "tokenInfo";
+            $("#submitLogin").click(function (e) {
+                e.preventDefault();
+                var loginData = {
+                    grant_type: 'password',
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Token',
+                    data: loginData,
+                    success: function (result) {
+                        $(".userName").text(result.userName);
+                        $(".userInfo").css("display", "block");
+                        $(".loginForm").css("display", "none");
+                        // save access token to session storage
+                        sessionStorage.setItem(tokenKey, result.access_token);
+                        $("#loginSuccessPanel").css("display", "block");
+                        $("#userName").html(result.userName);
+
+                        $("#loginSuccessAlert").css("display", "block");
+                        setTimeout("$('#loginSuccessAlert').css('display', 'none');", 3000);
+                    },
+                    error: function () {
+                        $("#loginFailedAlert").css("display", "block");
+                        setTimeout("$('#loginFailedAlert').css('display', 'none');", 3000);
+                    }
+                });
+            });
 
             // Logout
             $("#logOut").click(function(e) {

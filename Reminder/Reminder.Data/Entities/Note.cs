@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Reminder.Data.Entities
 {
+    /// <summary>
+    /// Note can contains photo, video and short description.
+    /// </summary>
     public class Note : Entity
     {
         public Note()
