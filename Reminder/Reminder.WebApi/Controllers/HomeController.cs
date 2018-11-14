@@ -17,7 +17,7 @@ namespace Reminder.WebApi.Controllers
             {
                 return PartialView();
             }
-            return HttpNotFound();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace Reminder.WebApi.Controllers
             {
                 return PartialView();
             }
-            return HttpNotFound();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -37,7 +37,13 @@ namespace Reminder.WebApi.Controllers
             {
                 return PartialView();
             }
-            return HttpNotFound();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult NoteDetals(int id)
+        {
+            return PartialView();
         }
     }
 }

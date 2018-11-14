@@ -1,1 +1,59 @@
-﻿<h2>Notes list should be here</h2>
+﻿@using System.Globalization
+@model IEnumerable<Reminder.Data.Entities.Note>
+
+<div class="container" style="padding-top: 20px;">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @*@foreach (var note in Model)
+                        {
+                            <a style="cursor: pointer" class="list-group-item clearfix" id="@note.Id">
+                                <span class="pull-left">
+                                    @if (note.Photos.Any())
+                                    {
+                                        <img src="data:image/gif;base64, @Convert.ToBase64String(note.Photos.ElementAt(0).Image)"
+                                             alt="Note photo"
+                                             class="img-responsive"
+                                             style="max-width: 160px; max-height: 100px;" />
+                                    }
+                                </span>
+                                <div class="pull-right text-container">
+                                    <h4 class="list-group-item-heading">@note.CreationDate.ToString("MMM d, yyyy", new CultureInfo("en-GB"))</h4>
+                                    <p class="list-group-item-text">@note.Description</p>
+                                </div>
+                            </a>
+                        }*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7" id="noteDetails">
+            <h2>No note selected</h2>
+        </div>
+    </div>
+
+    <a class="round-button"><h1>+</h1></a>
+    <!-- Loading indicator -->
+    <div class="loader"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get("/api/notes",
+            function(data) {
+                console.log(data);
+            }, "json");
+        
+        $(".loader").hide();
+        $(".list-group-item").click(function () {
+            $(".loader").show();
+            $(this.parentElement.children).removeClass("active");
+            $(this).addClass("active");
+            $(this).css({ "z-index": 0 });
+            $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
+        });
+    });
+</script>
