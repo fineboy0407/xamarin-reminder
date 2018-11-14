@@ -13,13 +13,31 @@ namespace Reminder.WebApi.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return HttpNotFound();
         }
 
         [HttpGet]
         public ActionResult Register()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return HttpNotFound();
+        }
+
+        [HttpGet]
+        public ActionResult Notes()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return HttpNotFound();
         }
     }
 }

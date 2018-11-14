@@ -15,6 +15,7 @@
             // Logout
             $("#logOut").click(function(e) {
                 e.preventDefault();
+                $("#loginPanel").css("display", "block");
                 $("#loginSuccessPanel").css("display", "none");
                 $("#userName").html("");
                 sessionStorage.removeItem(tokenKey);
@@ -38,11 +39,13 @@
                 success: function(result) {
                     // save access token to session storage
                     sessionStorage.setItem(tokenKey, result.access_token);
+                    $("#loginPanel").css("display", "none");
                     $("#loginSuccessPanel").css("display", "block");
                     $("#userName").html(result.userName);
 
                     $("#loginSuccessAlert").css("display", "block");
                     setTimeout("$('#loginSuccessAlert').css('display', 'none');", 3000);
+                    $("#formsContainer").load("@Url.Action("Notes","Home")");
                 },
                 error: function() {
                     $("#loginFailedAlert").css("display", "block");
@@ -64,7 +67,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data),
                 success: function () {
-                    window.location.href = "@Url.Action("Login","Home")";
+                    $("#formsContainer").load("@Url.Action("Login","Home")");
                     $("#registerSuccessAlert").css("display", "block");
                     setTimeout("$('#registerSuccessAlert').css('display', 'none');", 3000);
                 },
