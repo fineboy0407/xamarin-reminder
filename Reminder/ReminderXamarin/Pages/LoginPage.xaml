@@ -77,6 +77,12 @@
                     Style="{StaticResource LoginButtonStyle}"
                     Text="{extensions:Translate Login}" />
 
+                <Button x:Name="OAuthButton" 
+                        Command="{Binding LoginCommand}" 
+                        VerticalOptions="EndAndExpand"
+                        Style="{StaticResource LoginButtonStyle}"
+                        Text="OAuth Login" />
+
                 <StackLayout BackgroundColor="Transparent" Orientation="Horizontal" HorizontalOptions="Center" Spacing="2">
                     <Label TextColor="White" Text="{extensions:Translate DontHaveAccountQuestion}" />
                     <elements:ExtendedLabel TextColor="White" IsUnderlined="True" Text="{extensions:Translate Register}">

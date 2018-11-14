@@ -1,15 +1,20 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using ReminderXamarin.Helpers;
 using ReminderXamarin.Pages;
+using ReminderXamarin.Rest;
 using Xamarin.Forms;
 
 namespace ReminderXamarin.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly IIdentityClient _identityClient = new IdentityClient();
+
         public LoginViewModel()
         {
             LoginCommand = new Command(LoginCommandExecute);
+            OAuthLoginCommand = new Command(async() => await OAuthLoginCommandExecute());
         }
 
         public string UserName { get; set; }
@@ -21,6 +26,7 @@ namespace ReminderXamarin.ViewModels
         public bool IsValid { get; set; } = true;
 
         public ICommand LoginCommand { get; set; }
+        public ICommand OAuthLoginCommand { get; set; }
 
         private void LoginCommandExecute()
         {
@@ -33,6 +39,20 @@ namespace ReminderXamarin.ViewModels
             else
             {
                 IsValid = false;
+            }
+        }
+
+        private async Task OAuthLoginCommandExecute()
+        {
+            var loginModel = new LoginModel
+            {
+                UserName = UserName,
+                Password = Password
+            };
+            var result = await _identityClient.GetToken(loginModel);
+            if (result.AccessToken != null)
+            {
+                var accessToken = result.AccessToken;
             }
         }
     }
