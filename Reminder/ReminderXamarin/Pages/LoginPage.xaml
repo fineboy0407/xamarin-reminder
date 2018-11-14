@@ -78,7 +78,7 @@
                     Text="{extensions:Translate Login}" />
 
                 <Button x:Name="OAuthButton" 
-                        Command="{Binding LoginCommand}" 
+                        Command="{Binding OAuthLoginCommand}" 
                         VerticalOptions="EndAndExpand"
                         Style="{StaticResource LoginButtonStyle}"
                         Text="OAuth Login" />

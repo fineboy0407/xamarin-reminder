@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +12,7 @@ namespace ReminderXamarin.Rest
     public class IdentityClient : IIdentityClient
     {
         private readonly HttpClient _httpClient;
+        private readonly string BaseUrl = "http://10.132.34.144:8300/Token";
 
         public IdentityClient()
         {
@@ -23,10 +25,15 @@ namespace ReminderXamarin.Rest
         {
             try
             {
-                var content = JsonConvert.SerializeObject(model);
-                var data = new StringContent(content, Encoding.UTF8, "application/json");
+                var parameters = new Dictionary<string, string>
+                {
+                    { "grant_type", "password" },
+                    { "username", model.UserName },
+                    { "password", model.Password }
+                };
 
-                var response = await _httpClient.PostAsync("192.168.56.1:XXXX/Token", data);
+                var data = new FormUrlEncodedContent(parameters);
+                var response = await _httpClient.PostAsync(BaseUrl, data);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
