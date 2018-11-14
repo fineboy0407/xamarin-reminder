@@ -1,12 +1,12 @@
 ﻿<div class="header" style="padding-top: 0;">
-    <div class="container">
-        @Html.ActionLink("Login", "Login", "Home", new {@class="button"})
+    <div class="container" id="formsContainer">
+        @Html.Partial("Login")
     </div>
 </div>
 
 @section scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             var tokenKey = "tokenInfo";
             if (sessionStorage.getItem(tokenKey) !== null) {
                 $("#loginSuccessPanel").css("display", "block");
@@ -20,5 +20,59 @@
                 sessionStorage.removeItem(tokenKey);
             });
         });
+
+        // Login to app
+        var tokenKey = "tokenInfo";
+
+        function login() {
+            var loginData = {
+                grant_type: "password",
+                username: $("#username").val(),
+                password: $("#password").val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Token',
+                data: loginData,
+                success: function(result) {
+                    // save access token to session storage
+                    sessionStorage.setItem(tokenKey, result.access_token);
+                    $("#loginSuccessPanel").css("display", "block");
+                    $("#userName").html(result.userName);
+
+                    $("#loginSuccessAlert").css("display", "block");
+                    setTimeout("$('#loginSuccessAlert').css('display', 'none');", 3000);
+                },
+                error: function() {
+                    $("#loginFailedAlert").css("display", "block");
+                    setTimeout("$('#loginFailedAlert').css('display', 'none');", 3000);
+                }
+            });
+        };
+
+        function register() {
+            var data = {
+                Email: $("#registerUsername").val(),
+                Password: $("#registerPassword").val(),
+                ConfirmPassword: $("#confirmPassword").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Account/Register",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function () {
+                    window.location.href = "@Url.Action("Login","Home")";
+                    $("#registerSuccessAlert").css("display", "block");
+                    setTimeout("$('#registerSuccessAlert').css('display', 'none');", 3000);
+                },
+                error: function () {
+                    $("#registerFailedAlert").css("display", "block");
+                    setTimeout("$('#registerFailedAlert').css('display', 'none');", 3000);
+                }
+            });
+        };
     </script>
 }
