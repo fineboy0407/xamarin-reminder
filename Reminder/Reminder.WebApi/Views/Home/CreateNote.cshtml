@@ -1,1 +1,32 @@
-﻿<h2>Create note view</h2>
+﻿<div class="container">
+    <div class="col-xs-8">
+        <h2>New note</h2>
+        <hr />
+
+        <form enctype="multipart/form-data">
+            <textarea class="form-control" placeholder="description"></textarea>
+
+            <div class="form-group">
+                <input type="file" id="photos" name="Photos" class="upload" multiple />
+                <label for="photos">Pick photos...</label>
+                <label id="fileNames"></label>
+            </div>
+
+            <input type="button" class="button button-info" id="createFormSubmitButton" value="Create">
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#photos").change(function () {
+            var files = $("#photos").prop("files");
+            var names = $.map(files, function (val) { return val.name; });
+            $("#fileNames").text(names);
+        });
+
+        $("#createFormSubmitButton").click(function () {
+            alert("ok");
+        });
+    })
+</script>

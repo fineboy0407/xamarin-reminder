@@ -21,7 +21,10 @@ namespace Reminder.WebApi
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/CreateNote.css",
+                      "~/Content/Notes.css",
+                      "~/Content/NoteDetails.css"));
         }
     }
 }
