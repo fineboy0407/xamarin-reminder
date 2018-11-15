@@ -54,8 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\INoteRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Concrete\NoteRepository.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\AchievementModel.cs" />
     <Compile Include="Entities\AchievementNote.cs" />

@@ -4,6 +4,7 @@ using Reminder.Data.Entities;
 
 namespace Reminder.Data.Abstract
 {
+    // TODO: rewrite repository so there shouldn't be all notes available for all users.
     /// <summary>
     /// Provide CRUD functionality of the <see cref="Entity"/> items.
     /// </summary>

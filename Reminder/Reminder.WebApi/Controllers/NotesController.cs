@@ -1,44 +1,49 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Reminder.Data.Abstract;
 using Reminder.Data.Entities;
 
 namespace Reminder.WebApi.Controllers
 {
+    [Authorize]
     public class NotesController : ApiController
     {
-        private readonly IRepository<Note> _noteRepository;
+        private readonly INoteRepository _noteRepository;
+        private readonly string _userId;
 
-        public NotesController(IRepository<Note> noteRepository)
+        public NotesController(INoteRepository noteRepository)
         {
+            _userId = RequestContext.Principal.Identity.GetUserId();
             _noteRepository = noteRepository;
         }
 
-        public IEnumerable<Note> Get()
+        public async Task<IEnumerable<Note>> Get()
         {
-            return _noteRepository.GetAll().ToList();
+            return await _noteRepository.GetAll(_userId);
         }
 
         public async Task<Note> GetNote(int id)
         {
-            return await _noteRepository.GetByIdAsync(id);
+            return await _noteRepository.Get(_userId, id);
         }
 
         public async Task Post([FromBody] Note note)
         {
-            await _noteRepository.CreateAsync(note);
+            note.UserId = _userId;
+            await _noteRepository.Create(_userId, note);
         }
 
         public async Task Put(int id, [FromBody] Note note)
         {
-            await _noteRepository.UpdateAsync(note);
+            note.UserId = _userId;
+            await _noteRepository.Update(_userId, id, note);    
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int noteId)
         {
-            await _noteRepository.DeleteAsync(id);
+            await _noteRepository.Delete(_userId, noteId);
         }
     }
 }

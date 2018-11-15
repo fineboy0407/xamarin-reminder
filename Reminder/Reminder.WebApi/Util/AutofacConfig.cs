@@ -22,6 +22,10 @@ namespace Reminder.WebApi.Util
                 .WithParameter("dbContext", ApplicationDbContext.Create())
                 .As<IRepository<Note>>().SingleInstance();
 
+            builder.RegisterType<NoteRepository>()
+                .WithParameter("dbContext", ApplicationDbContext.Create())
+                .As<INoteRepository>().SingleInstance();
+
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }

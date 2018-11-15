@@ -41,6 +41,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/Notes',
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
                 data: noteModel,
                 success: function(result) {
                     console.log(result);

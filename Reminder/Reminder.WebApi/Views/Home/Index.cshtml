@@ -7,8 +7,7 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function() {
-            var tokenKey = "tokenInfo";
-            if (sessionStorage.getItem(tokenKey) !== null) {
+            if (sessionStorage.getItem("token") !== null) {
                 $("#loginSuccessPanel").css("display", "block");
             }
 
@@ -18,13 +17,11 @@
                 $("#loginPanel").css("display", "block");
                 $("#loginSuccessPanel").css("display", "none");
                 $("#userName").html("");
-                sessionStorage.removeItem(tokenKey);
+                localStorage.removeItem("token");
             });
         });
 
         // Login to app
-        var tokenKey = "tokenInfo";
-
         function login() {
             var loginData = {
                 grant_type: "password",
@@ -38,7 +35,7 @@
                 data: loginData,
                 success: function(result) {
                     // save access token to session storage
-                    sessionStorage.setItem(tokenKey, result.access_token);
+                    localStorage.setItem("token", result.access_token);
                     $("#loginPanel").css("display", "none");
                     $("#loginSuccessPanel").css("display", "block");
                     $("#userName").html(result.userName);

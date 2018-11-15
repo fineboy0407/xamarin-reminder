@@ -29,8 +29,11 @@
     }
 
     $(document).ready(function () {
-        $.get("/api/notes",
-            function (data) {
+        $.ajax({
+            url: "/api/notes",
+            type: "GET",
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            success: function(data) {
                 if (data.length !== 0) {
                     for (var i = 0; i < data.length; i++) {
                         var html = "<a style=\"cursor: pointer\" class=\"list-group-item clearfix\" id=\"" + data[i].id + "\"></a>" + "<span class=\"pull - left\">";
@@ -42,14 +45,19 @@
                                 "style=\"max-width: 160px; max-height: 100px;\" />";
                         }
                         html += "</span>";
-                        html += "<div class=\"pull-right text-container\"><h4 class=\"list-group-item-heading\">" + data[i].creationDate +"</h4>" +
-                            "<p class=\"list-group-item-text\">" +data[i].description +"</p></div>";
+                        html += "<div class=\"pull-right text-container\"><h4 class=\"list-group-item-heading\">" + data[i].creationDate + "</h4>" +
+                            "<p class=\"list-group-item-text\">" + data[i].description + "</p></div>";
 
                         $("#notesList").append(html);
                     }
                 }
                 console.log(data);
-            }, "json");
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+       
         
         $(".loader").hide();
         $(".list-group-item").click(function () {
