@@ -4,7 +4,7 @@
         <hr />
 
         <form enctype="multipart/form-data">
-            <textarea class="form-control" placeholder="description"></textarea>
+            <textarea id="noteDescription" class="form-control" placeholder="description"></textarea>
 
             <div class="form-group">
                 <input type="file" id="photos" name="Photos" class="upload" multiple />
@@ -26,7 +26,29 @@
         });
 
         $("#createFormSubmitButton").click(function () {
-            alert("ok");
+            var currentDate = new Date();
+
+            var noteModel = {
+                description: $("#noteDescription").val(),
+                creationDate: currentDate.toJSON(),
+                editDate: currentDate.toJSON(),
+                userId: '1',
+                photos: [],
+                videos: []
+            };
+            console.log(noteModel);
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Notes',
+                data: noteModel,
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     })
 </script>
