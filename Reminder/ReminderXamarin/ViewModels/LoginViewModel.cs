@@ -53,6 +53,7 @@ namespace ReminderXamarin.ViewModels
             if (result.AccessToken != null)
             {
                 var accessToken = result.AccessToken;
+                Settings.AccessToken = accessToken;
             }
         }
     }
