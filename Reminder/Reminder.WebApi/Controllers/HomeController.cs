@@ -40,6 +40,16 @@ namespace Reminder.WebApi.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult CreateNote()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult NoteDetals(int id)
         {
