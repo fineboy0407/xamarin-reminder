@@ -11,39 +11,43 @@ namespace Reminder.WebApi.Controllers
     public class NotesController : ApiController
     {
         private readonly INoteRepository _noteRepository;
-        private readonly string _userId;
 
         public NotesController(INoteRepository noteRepository)
         {
-            _userId = RequestContext.Principal.Identity.GetUserId();
             _noteRepository = noteRepository;
         }
 
         public async Task<IEnumerable<Note>> Get()
         {
-            return await _noteRepository.GetAll(_userId);
+            var userId = User.Identity.GetUserId();
+            var allNotes = await _noteRepository.GetAllNotes(userId);
+            return allNotes;
         }
 
         public async Task<Note> GetNote(int id)
         {
-            return await _noteRepository.Get(_userId, id);
+            var userId = User.Identity.GetUserId();
+            return await _noteRepository.GetNote(userId, id);
         }
 
         public async Task Post([FromBody] Note note)
         {
-            note.UserId = _userId;
-            await _noteRepository.Create(_userId, note);
+            var userId = User.Identity.GetUserId();
+            note.UserId = userId;
+            await _noteRepository.CreateNote(userId, note);
         }
 
         public async Task Put(int id, [FromBody] Note note)
         {
-            note.UserId = _userId;
-            await _noteRepository.Update(_userId, id, note);    
+            var userId = User.Identity.GetUserId();
+            note.UserId = userId;
+            await _noteRepository.UpdateNote(userId, id, note);    
         }
 
         public async Task Delete(int noteId)
         {
-            await _noteRepository.Delete(_userId, noteId);
+            var userId = User.Identity.GetUserId();
+            await _noteRepository.DeleteNote(userId, noteId);
         }
     }
 }
