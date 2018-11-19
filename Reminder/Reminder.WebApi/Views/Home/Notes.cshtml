@@ -34,8 +34,6 @@
             type: "GET",
             headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
             success: function (data) {
-                console.log(data);
-
                 if (data.length !== 0) {
                     for (var i = 0; i < data.length; i++) {
                         var html = "<a style=\"cursor: pointer\" class=\"list-group-item clearfix\" id=\"" + data[i].Id + "\">" + "<span class=\"pull - left\">";
@@ -47,10 +45,18 @@
                                 "style=\"max-width: 160px; max-height: 100px;\" />";
                         }
                         html += "</span>";
-                        html += "<div class=\"pull-right text-container\"><h4 class=\"list-group-item-heading\">" + data[i].CreationDate + "</h4>" +
+                        html += "<div class=\"pull-right text-container\"><h4 class=\"list-group-item-heading\">" + moment(data[i].CreationDate).format("LL") + "</h4>" +
                             "<p class=\"list-group-item-text\">" + data[i].Description + "</p></div></a>";
 
                         $("#notesList").append(html);
+
+                        $(".list-group-item").click(function () {
+                            $(".loader").show();
+                            $(this.parentElement.children).removeClass("active");
+                            $(this).addClass("active");
+                            $(this).css({ "z-index": 0 });
+                            $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
+                        });
                     }
                 }
             },
@@ -58,16 +64,8 @@
                 console.log(error);
             }
         });
-       
         
         $(".loader").hide();
-        $(".list-group-item").click(function () {
-            $(".loader").show();
-            $(this.parentElement.children).removeClass("active");
-            $(this).addClass("active");
-            $(this).css({ "z-index": 0 });
-            $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
-        });
 
         $("#newNoteLink").click(function() {
             $("#formsContainer").load("@Url.Action("CreateNote","Home")");

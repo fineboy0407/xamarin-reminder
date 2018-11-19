@@ -19,6 +19,12 @@ namespace Reminder.WebApi
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/momentjs").Include(
+                "~/Scripts/moment.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/momentjswithlocales").Include(
+                "~/Scripts/moment-with-locales.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
