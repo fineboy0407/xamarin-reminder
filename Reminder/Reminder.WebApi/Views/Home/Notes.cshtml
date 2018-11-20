@@ -34,6 +34,7 @@
             type: "GET",
             headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
             success: function (data) {
+                console.log(data);
                 if (data.length !== 0) {
                     for (var i = 0; i < data.length; i++) {
                         var html = "<a style=\"cursor: pointer\" class=\"list-group-item clearfix\" id=\"" + data[i].Id + "\">" + "<span class=\"pull - left\">";

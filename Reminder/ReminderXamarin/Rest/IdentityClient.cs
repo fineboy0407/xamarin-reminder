@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ReminderXamarin.Interfaces;
+using ReminderXamarin.Rest.Models;
 using Xamarin.Forms;
 
 namespace ReminderXamarin.Rest

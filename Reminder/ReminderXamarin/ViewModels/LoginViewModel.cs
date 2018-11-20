@@ -3,6 +3,7 @@ using System.Windows.Input;
 using ReminderXamarin.Helpers;
 using ReminderXamarin.Pages;
 using ReminderXamarin.Rest;
+using ReminderXamarin.Rest.Models;
 using Xamarin.Forms;
 
 namespace ReminderXamarin.ViewModels
@@ -54,6 +55,12 @@ namespace ReminderXamarin.ViewModels
             {
                 var accessToken = result.AccessToken;
                 Settings.AccessToken = accessToken;
+                Application.Current.MainPage = new NavigationPage(new MenuPage(UserName));
+                IsValid = true;
+            }
+            else
+            {
+                IsValid = false;
             }
         }
     }

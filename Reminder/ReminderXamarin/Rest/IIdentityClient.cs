@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ReminderXamarin.Rest.Models;
 
 namespace ReminderXamarin.Rest
 {

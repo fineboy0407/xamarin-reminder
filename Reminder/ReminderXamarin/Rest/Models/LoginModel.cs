@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ReminderXamarin.Rest
+namespace ReminderXamarin.Rest.Models
 {
     public class LoginModel
     {
