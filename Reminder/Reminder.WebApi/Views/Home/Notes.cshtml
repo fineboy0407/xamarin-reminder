@@ -20,14 +20,6 @@
 </div>
 
 <script type="text/javascript">
-    function bin2String(array) {
-        var result = "";
-        for (var i = 0; i < array.length; i++) {
-            result += String.fromCharCode(parseInt(array[i], 2));
-        }
-        return result;
-    }
-
     $(document).ready(function () {
         $.ajax({
             url: "/api/notes",
@@ -41,7 +33,7 @@
 
                         if (data[i].Photos[0] != null) {
                             html += "<img src=\"data:image/gif;base64, " +
-                                bin2String(data[i].Photos[0].Image) +
+                                data[i].Photos[0].Image +
                                 "alt=\"Note photo\" class=\"img-responsive\" " +
                                 "style=\"max-width: 160px; max-height: 100px;\" />";
                         }
