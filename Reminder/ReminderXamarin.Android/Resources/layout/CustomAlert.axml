@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:orientation="vertical"
+              android:background="@android:color/white"
+              android:layout_width="300dp"
+              android:layout_height="match_parent"
+              android:paddingTop="30dp">
+  <TextView
+    android:id="@+id/alertText"
+    android:text="Confirm"
+    android:textSize="16sp"
+    android:minLines="2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#302f2f"
+    android:layout_gravity="center" />
+  <Button
+    android:id="@+id/alertApplyButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Ok"
+    android:textAllCaps="false"
+    android:layout_gravity="bottom"
+    android:textColor="#fafafa"
+    android:background="@android:color/black" />
+</LinearLayout>

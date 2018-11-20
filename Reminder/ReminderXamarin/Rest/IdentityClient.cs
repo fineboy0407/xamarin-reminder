@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ReminderXamarin.Interfaces;
+using Xamarin.Forms;
 
 namespace ReminderXamarin.Rest
 {
@@ -19,8 +20,6 @@ namespace ReminderXamarin.Rest
             _httpClient = new HttpClient();
         }
 
-        // TODO: handle other codes (400,500)
-        // TODO: deploy web api to local IIS
         public async Task<TokenResponse> GetToken(LoginModel model)
         {
             try
@@ -39,6 +38,9 @@ namespace ReminderXamarin.Rest
                 {
                     return JsonConvert.DeserializeObject<TokenResponse>(await response.Content.ReadAsStringAsync());
                 }
+                var alertService = DependencyService.Get<IAlertService>();
+                alertService.ShowOkAlert("Error during response", "Ok");
+                return new TokenResponse();
             }
             catch (Exception ex)
             {

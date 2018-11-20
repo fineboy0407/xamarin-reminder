@@ -50,5 +50,23 @@ namespace ReminderXamarin.Droid.Interfaces
 
             return tcs.Task;
         }
+
+        public void ShowOkAlert(string message, string okButtonText)
+        {
+            var dialog = new Dialog(CrossCurrentActivity.Current.Activity);
+            dialog.Window.SetBackgroundDrawable(ContextCompat.GetDrawable(CrossCurrentActivity.Current.Activity, Android.Resource.Color.Transparent));
+            dialog.SetContentView(Resource.Layout.CustomAlert);
+            TextView text = (TextView)dialog.FindViewById(Resource.Id.alertText);
+            text.SetText(message, TextView.BufferType.Normal);
+
+            Button button = (Button)dialog.FindViewById(Resource.Id.alertApplyButton);
+            button.SetText(okButtonText, TextView.BufferType.Normal);
+            button.Click += (sender, args) =>
+            {
+                dialog.Dismiss();
+            };
+
+            dialog.Show();
+        }
     }
 }

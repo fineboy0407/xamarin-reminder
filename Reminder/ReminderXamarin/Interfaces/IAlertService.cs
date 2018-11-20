@@ -8,5 +8,6 @@ namespace ReminderXamarin.Interfaces
     public interface IAlertService
     {
         Task<bool> ShowYesNoAlert(string message, string yesButtonText, string noButtonText);
+        void ShowOkAlert(string message, string okButtonText);
     }
 }
