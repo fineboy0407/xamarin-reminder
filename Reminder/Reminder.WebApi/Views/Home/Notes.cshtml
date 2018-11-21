@@ -55,33 +55,31 @@
                             type: "GET",
                             headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
                             success: function(note) {
-                                console.log(note);
                                 $(".loader").hide();
 
                                 var html = "<div class=\"row\">";
 
                                 if (note.Photos[0] !== undefined) {
-                                    html += "<div class=\"col=xs-12\" id=\"photos-container\"";
+                                    html += "<div class=\"col=xs-12\" id=\"photos-container\">";
 
-                                    for (var i = 0; i < note.Photos.length; i++) {
-                                        html += "<img src=\"data:image/gif;base64, " + note.Photos[i].Image + "\" id=\"" + note.Photos[i].Id + "\" alt=\"No photo\" class=\"img-responsive\"" +
-                                            "style=\"max-height: 300px; cursor: pointer;\"";
-                                    }
+                                    console.log(note.Photos[0]);
+                                    html += "<img src=\"data:image/gif;base64, " +
+                                        note.Photos[0].Image + "\" id=\"" + note.Photos[0].Id +
+                                        "\" alt=\"No photo\" class=\"img-responsive\"" +
+                                        "style=\"max-height: 300px; cursor: pointer;\" />";
 
                                     html += "</div>";
                                 } else {
                                     html += "<div class=\"col-xs-12\"><h2>No photos</h2></div>";
                                 }
                                 html += "<div class=\"col-xs-12\"><p>" + note.Description + "</p></div></div>";
-                                $("#noteDetails").append(html);
+                                $("#noteDetails").html(html);
                             },
                             error: function(error) {
                                 console.log(error);
                                 $(".loader").hide();
                             }
                         });
-
-                        $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
                     });
                 }
             },
