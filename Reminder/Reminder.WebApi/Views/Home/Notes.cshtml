@@ -31,10 +31,10 @@
                     for (var i = 0; i < data.length; i++) {
                         var html = "<a style=\"cursor: pointer\" class=\"list-group-item clearfix\" id=\"" + data[i].Id + "\">" + "<span class=\"pull - left\">";
 
-                        if (data[i].Photos[0] != null) {
+                        if (data[i].Photos[0] !== undefined) {
                             html += "<img src=\"data:image/gif;base64, " +
                                 data[i].Photos[0].Image +
-                                "alt=\"Note photo\" class=\"img-responsive\" " +
+                                "\" alt=\"Note photo\" class=\"img-responsive\" " +
                                 "style=\"max-width: 160px; max-height: 100px;\" />";
                         }
                         html += "</span>";
@@ -42,15 +42,47 @@
                             "<p class=\"list-group-item-text\">" + data[i].Description + "</p></div></a>";
 
                         $("#notesList").append(html);
-
-                        $(".list-group-item").click(function () {
-                            $(".loader").show();
-                            $(this.parentElement.children).removeClass("active");
-                            $(this).addClass("active");
-                            $(this).css({ "z-index": 0 });
-                            $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
-                        });
                     }
+
+                    $(".list-group-item").click(function () {
+                        $(".loader").show();
+                        $(this.parentElement.children).removeClass("active");
+                        $(this).addClass("active");
+                        $(this).css({ "z-index": 0 });
+
+                        $.ajax({
+                            url: "api/notes/" + this.id,
+                            type: "GET",
+                            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                            success: function(note) {
+                                console.log(note);
+                                $(".loader").hide();
+
+                                var html = "<div class=\"row\">";
+
+                                if (note.Photos[0] !== undefined) {
+                                    html += "<div class=\"col=xs-12\" id=\"photos-container\"";
+
+                                    for (var i = 0; i < note.Photos.length; i++) {
+                                        html += "<img src=\"data:image/gif;base64, " + note.Photos[i].Image + "\" id=\"" + note.Photos[i].Id + "\" alt=\"No photo\" class=\"img-responsive\"" +
+                                            "style=\"max-height: 300px; cursor: pointer;\"";
+                                    }
+
+                                    html += "</div>";
+                                } else {
+                                    html += "<div class=\"col-xs-12\"><h2>No photos</h2></div>";
+                                }
+                                html += "<div class=\"col-xs-12\"><p>" + note.Description + "</p></div></div>";
+                                $("#noteDetails").append(html);
+                            },
+                            error: function(error) {
+                                console.log(error);
+                                $(".loader").hide();
+                            }
+                        });
+
+                        $("#noteDetails").load("@Url.Action("NoteDetals", "Home")", { "id": this.id });
+                    });
                 }
             },
             error: function(error) {

@@ -22,12 +22,19 @@ namespace Reminder.Data.Concrete
 
         public async Task<IEnumerable<Note>> GetAllNotes(string userId)
         {
-            return await DbSet.Where(x => x.UserId == userId).ToListAsync();
+            return await DbSet
+                .Where(x => x.UserId == userId)
+                .Include(x => x.Photos)
+                .Include(x => x.Videos)
+                .ToListAsync();
         }
 
         public async Task<Note> GetNote(string userId, int noteId)
         {
-            return await DbSet.FirstOrDefaultAsync(x => x.UserId == userId && x.Id == noteId);
+            return await DbSet
+                .Include(x => x.Photos)
+                .Include(x => x.Videos)
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.Id == noteId);
         }
 
         public async Task<Note> CreateNote(string userId, Note note)

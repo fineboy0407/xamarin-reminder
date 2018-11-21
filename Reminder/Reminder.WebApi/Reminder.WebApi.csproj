@@ -332,6 +332,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Notes.cshtml" />
     <Content Include="Views\Home\CreateNote.cshtml" />
+    <Content Include="Views\Home\NoteDetals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,7 +53,11 @@ namespace Reminder.WebApi.Controllers
         [HttpPost]
         public ActionResult NoteDetals(int id)
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

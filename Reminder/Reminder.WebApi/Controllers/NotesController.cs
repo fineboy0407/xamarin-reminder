@@ -21,13 +21,25 @@ namespace Reminder.WebApi.Controllers
         {
             var userId = User.Identity.GetUserId();
             var allNotes = await _noteRepository.GetAllNotes(userId);
+
+            foreach (var note in allNotes)
+            {
+                Parallel.ForEach(note.Photos, x => x.Note = null);
+                Parallel.ForEach(note.Videos, x => x.Note = null);
+            }
+
             return allNotes;
         }
 
         public async Task<Note> GetNote(int id)
         {
             var userId = User.Identity.GetUserId();
-            return await _noteRepository.GetNote(userId, id);
+            var note = await _noteRepository.GetNote(userId, id);
+
+            Parallel.ForEach(note.Photos, x => x.Note = null);
+            Parallel.ForEach(note.Videos, x => x.Note = null);
+
+            return note;
         }
 
         public async Task Post([FromBody] Note note)
