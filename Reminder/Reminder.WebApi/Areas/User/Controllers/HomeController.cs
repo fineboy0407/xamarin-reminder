@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Reminder.WebApi.Controllers
+namespace Reminder.WebApi.Areas.User.Controllers
 {
     public class HomeController : Controller
     {
