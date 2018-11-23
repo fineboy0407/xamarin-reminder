@@ -1,0 +1,25 @@
+.header {
+    background-size: auto;
+    height: 100vh;
+    background: url("../../assets/img/mainpage_background.jpg") fixed no-repeat center;
+    color: white;
+    text-align: center;
+  }
+  
+  h1 {
+    position: absolute;
+    font-size: 60px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .header button {
+    position: absolute;
+    top: 50%;
+    width: 200px;
+    height: 60px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }

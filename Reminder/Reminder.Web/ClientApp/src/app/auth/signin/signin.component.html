@@ -1,0 +1,24 @@
+<div class="header">
+  <div class="container">
+    <div class="row">
+      <h2>Login</h2>
+      <hr>
+      <form [formGroup]='signInForm' (ngSubmit)="onSubmit(signInForm)">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="email" placeholder="email"/>
+          <div *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].valid">
+            <span *ngIf="signInForm.controls['email'].hasError('required')">Email is required</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="password"/>
+          <div *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].valid">
+            <span *ngIf="signInForm.controls['password'].hasError('required')">Password is required</span>
+          </div>
+        </div>
+        <button type="submit" class="button button-info" [disabled]='!signInForm.valid'>Login</button>
+      </form>
+    </div>
+  </div>
+</div>

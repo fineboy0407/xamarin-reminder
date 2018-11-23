@@ -1,0 +1,24 @@
+<div class="col-xs-8">
+  <h2>New note</h2>
+  <hr />
+  <form [formGroup]='createComponentForm' (ngSubmit)="onSubmit(createComponentForm)">
+    <textarea class="form-control" formControlName="description" placeholder="description"></textarea>
+    <div *ngIf="createComponentForm.controls['description'].touched && createComponentForm.controls['description'].valid">
+      <span *ngIf="createComponentForm.controls['description'].hasError('required')">Description is required</span>
+    </div>
+
+    <div class="form-group">
+      <input type="file"
+             name="file"
+             id="photo"
+             class="upload"
+             (change)="onFileChange($event, fileNames)"
+             #fileInput
+             multiple />
+      <label for="photo">Pick photos...</label>
+      <label #fileNames></label>
+    </div>
+
+    <button type="submit" class="button button-info" [disabled]='!createComponentForm.valid'>Create</button>
+  </form>
+</div>

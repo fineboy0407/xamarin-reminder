@@ -1,0 +1,16 @@
+<a
+  style="cursor: pointer; z-index: 0"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
+  <span class="pull-left">
+    <img src="data:image/gif;base64,{{ note?.photos[0]?.image }}"
+         alt="No photos"
+         class="img-responsive"
+         style="max-width: 160px; max-height: 100px;" />
+  </span>
+  <div class="pull-right text-container">
+    <h4 class="list-group-item-heading">{{ note?.date | date }}</h4>
+    <p class="list-group-item-text">{{ note?.description }}</p>
+  </div>
+</a>

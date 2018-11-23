@@ -1,0 +1,9 @@
+.text-container {
+    text-overflow: ellipsis;
+    width: 200px;
+    height: 70px;
+    white-space: normal;
+    overflow: hidden;
+  
+    padding: 10px;
+  }

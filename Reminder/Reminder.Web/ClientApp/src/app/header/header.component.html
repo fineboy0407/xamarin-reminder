@@ -1,0 +1,19 @@
+<div class="topnav">
+  <a routerLink="/" class="logo">My Diary app</a>
+  <a routerLink="/notes" routerLinkActive="active">Notes</a>
+
+  <ul class="topnav-right">
+    <ng-template [ngIf]="!isAuthenticated()">
+      <a routerLink="/signup">Register</a>
+      <a routerLink="/signin">Login</a>
+    </ng-template>
+
+    <li class="dropdown" appDropdown *ngIf="isAuthenticated()">
+      <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-content">Profile</a></li>
+        <li> <a class="dropdown-content" (click)="onLogout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>

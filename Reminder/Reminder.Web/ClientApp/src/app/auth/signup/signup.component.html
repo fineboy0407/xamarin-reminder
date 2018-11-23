@@ -1,0 +1,24 @@
+<div class="header">
+  <div class="container">
+    <div class="row">
+      <h2>Register</h2>
+      <hr>
+      <form [formGroup]='signUpForm' (ngSubmit)="onSubmit(signUpForm)">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="email" placeholder="email"/>
+          <div *ngIf="signUpForm.controls['email'].touched && signUpForm.controls['email'].valid">
+            <span *ngIf="signUpForm.controls['email'].hasError('required')">Name is required</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="password"/>
+          <div *ngIf="signUpForm.controls['password'].touched && signUpForm.controls['password'].valid">
+            <span *ngIf="signUpForm.controls['password'].hasError('required')">Password is required</span>
+          </div>
+        </div>
+        <button type="submit" class="button success" [disabled]='!signUpForm.valid'>Register</button>
+      </form>
+    </div>
+  </div>
+</div>
