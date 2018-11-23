@@ -8,8 +8,9 @@ using Reminder.Data.Core;
 
 namespace Reminder.Data.Repositories
 {
-    public class EntityFrameworkReadonlyRepository<TContext> : IReadOnlyRepository<Entity>
+    public class EntityFrameworkReadonlyRepository<TContext, TEntity> : IReadOnlyRepository<TEntity>
         where TContext : DbContext
+        where TEntity : Entity
     {
         protected readonly TContext Context;
 
@@ -18,15 +19,15 @@ namespace Reminder.Data.Repositories
             Context = context;
         }
 
-        protected virtual IQueryable<Entity> GetQueryable(
-            Expression<Func<Entity, bool>> filter = null,
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        protected virtual IQueryable<TEntity> GetQueryable(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null)
         {
             includeProperties = includeProperties ?? string.Empty;
-            IQueryable<Entity> query = Context.Set<Entity>();
+            IQueryable<TEntity> query = Context.Set<TEntity>();
 
             if (filter != null)
             {
@@ -57,8 +58,8 @@ namespace Reminder.Data.Repositories
             return query;
         }
 
-        public IEnumerable<Entity> GetAll(
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public IEnumerable<TEntity> GetAll(
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null)
@@ -66,8 +67,8 @@ namespace Reminder.Data.Repositories
             return GetQueryable(null, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public async Task<IEnumerable<Entity>> GetAllAsync(
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public async Task<IEnumerable<TEntity>> GetAllAsync(
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null)
@@ -75,9 +76,9 @@ namespace Reminder.Data.Repositories
             return await GetQueryable(null, orderBy, includeProperties, skip, take).ToListAsync();
         }
 
-        public IEnumerable<Entity> Get(
-            Expression<Func<Entity, bool>> filter = null,
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null)
@@ -85,9 +86,9 @@ namespace Reminder.Data.Repositories
             return GetQueryable(filter, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public async Task<IEnumerable<Entity>> GetAsync(
-            Expression<Func<Entity, bool>> filter = null,
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public async Task<IEnumerable<TEntity>> GetAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null)
@@ -95,59 +96,59 @@ namespace Reminder.Data.Repositories
             return await GetQueryable(filter, orderBy, includeProperties, skip, take).ToListAsync();
         }
 
-        public Entity GetOne(Expression<Func<Entity, bool>> filter = null,
+        public TEntity GetOne(Expression<Func<TEntity, bool>> filter = null,
             string includeProperties = null)
         {
             return GetQueryable(filter, null, includeProperties).SingleOrDefault();
         }
 
-        public async Task<Entity> GetOneAsync(Expression<Func<Entity, bool>> filter = null, string includeProperties = null)
+        public async Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> filter = null, string includeProperties = null)
         {
             return await GetQueryable(filter, null, includeProperties).SingleOrDefaultAsync();
         }
 
-        public Entity GetFirst(
-            Expression<Func<Entity, bool>> filter = null,
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public TEntity GetFirst(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null)
         {
             return GetQueryable(filter, orderBy, includeProperties).SingleOrDefault();
         }
 
-        public async Task<Entity> GetFirstAsync(
-            Expression<Func<Entity, bool>> filter = null,
-            Func<IQueryable<Entity>, IOrderedQueryable<Entity>> orderBy = null,
+        public async Task<TEntity> GetFirstAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null)
         {
             return await GetQueryable(filter, orderBy, includeProperties).SingleOrDefaultAsync();
         }
 
-        public Entity GetById(object id)
+        public TEntity GetById(object id)
         {
-            return Context.Set<Entity>().Find(id);
+            return Context.Set<TEntity>().Find(id);
         }
 
-        public async Task<Entity> GetByIdAsync(object id)
+        public async Task<TEntity> GetByIdAsync(object id)
         {
-            return await Context.Set<Entity>().FindAsync(id);
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
-        public int GetCount(Expression<Func<Entity, bool>> filter = null)
+        public int GetCount(Expression<Func<TEntity, bool>> filter = null)
         {
             return GetQueryable(filter).Count();
         }
 
-        public Task<int> GetCountAsync(Expression<Func<Entity, bool>> filter = null)
+        public Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             return GetQueryable(filter).CountAsync();
         }
 
-        public bool GetExists(Expression<Func<Entity, bool>> filter = null)
+        public bool GetExists(Expression<Func<TEntity, bool>> filter = null)
         {
             return GetQueryable(filter).Any();
         }
 
-        public async Task<bool> GetExistsAsync(Expression<Func<Entity, bool>> filter = null)
+        public async Task<bool> GetExistsAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             return await GetQueryable(filter).AnyAsync();
         }

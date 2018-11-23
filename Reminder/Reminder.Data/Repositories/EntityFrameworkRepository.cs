@@ -4,34 +4,35 @@ using Reminder.Data.Core;
 
 namespace Reminder.Data.Repositories
 {
-    public class EntityFrameworkRepository<TContext> : EntityFrameworkReadonlyRepository<TContext>, IRepository<Entity>
+    public class EntityFrameworkRepository<TContext, TEntity> : EntityFrameworkReadonlyRepository<TContext, TEntity>, IRepository<TEntity>
         where TContext : DbContext
+        where TEntity : Entity
     {
         public EntityFrameworkRepository(TContext context)
             : base(context)
         {
         }
 
-        public void Create(Entity entity)
+        public void Create(TEntity entity)
         {
-            Context.Set<Entity> ().Add(entity);
+            Context.Set<TEntity>().Add(entity);
         }
 
-        public void Update(Entity entity)
+        public void Update(TEntity entity)
         {
-            Context.Set<Entity>().Attach(entity);
+            Context.Set<TEntity>().Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(object id)
         {
-            Entity entity = Context.Set<Entity>().Find(id);
+            TEntity entity = Context.Set<TEntity>().Find(id);
             Delete(entity);
         }
 
-        public void Delete(Entity entity)
+        public void Delete(TEntity entity)
         {
-            var dbSet = Context.Set<Entity>();
+            var dbSet = Context.Set<TEntity>();
             if (Context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);
