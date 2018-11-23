@@ -18,16 +18,35 @@ namespace Reminder.Data.Repositories
             Context.Set<TEntity>().Add(entity);
         }
 
+        public async Task CreateAsync(TEntity entity)
+        {
+            await Context.Set<TEntity>().AddAsync(entity);
+        }
+
         public void Update(TEntity entity)
         {
             Context.Set<TEntity>().Attach(entity);
             Context.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Delete(object id)
+        public TEntity Delete(object id)
         {
             TEntity entity = Context.Set<TEntity>().Find(id);
-            Delete(entity);
+            if (entity != null)
+            {
+                Delete(entity);
+            }
+            return entity;
+        }
+
+        public async Task<TEntity> DeleteAsync(object id)
+        {
+            TEntity entity = await Context.Set<TEntity>().FindAsync(id);
+            if (entity != null)
+            {
+                Delete(entity);
+            }
+            return entity;
         }
 
         public void Delete(TEntity entity)

@@ -11,9 +11,13 @@ namespace Reminder.Data.Core
     {
         void Create(TEntity entity);
 
+        Task CreateAsync(TEntity entity);
+
         void Update(TEntity entity);
 
-        void Delete(object id);
+        TEntity Delete(object id);
+
+        Task<TEntity> DeleteAsync(object id);
 
         void Delete(TEntity entity);
 
