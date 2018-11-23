@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+using Reminder.Data.Core;
 
 namespace Reminder.Data.Entities
 {
-    public class AppUser : IdentityUser
+    public class AppUser : IdentityUser, IEntity<string>
     {
         public AppUser()
         {
@@ -13,7 +14,7 @@ namespace Reminder.Data.Entities
             ToDoModels = new List<ToDoModel>();
         }
 
-        public byte[] ImageContent { get; set; }
+        public string ImageContent { get; set; }
 
         public ICollection<Note> Notes { get; set; }
         public ICollection<AchievementModel> Achievements { get; set; }

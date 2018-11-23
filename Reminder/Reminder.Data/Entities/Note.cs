@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reminder.Data.Core;
 
 namespace Reminder.Data.Entities
 {

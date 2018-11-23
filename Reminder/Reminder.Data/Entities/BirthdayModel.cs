@@ -1,10 +1,11 @@
 ﻿using System;
+using Reminder.Data.Core;
 
 namespace Reminder.Data.Entities
 {
     public class BirthdayModel : Entity
     {
-        public byte[] ImageContent { get; set; }
+        public string ImageContent { get; set; }
         public string Name { get; set; }
         public DateTime BirthDayDate { get; set; }
         public string GiftDescription { get; set; }

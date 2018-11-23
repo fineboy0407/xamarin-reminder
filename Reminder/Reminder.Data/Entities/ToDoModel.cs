@@ -1,4 +1,5 @@
 ﻿using System;
+using Reminder.Data.Core;
 
 namespace Reminder.Data.Entities
 {

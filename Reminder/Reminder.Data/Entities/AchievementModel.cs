@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Reminder.Data.Core;
 
 namespace Reminder.Data.Entities
 {
@@ -9,7 +10,7 @@ namespace Reminder.Data.Entities
             AchievementNotes = new List<AchievementNote>();
         }
 
-        public byte[] ImageContent { get; set; }
+        public string ImageContent { get; set; }
         public string Title { get; set; }
         public string GeneralDescription { get; set; }
         public int GeneralTimeSpent { get; set; }

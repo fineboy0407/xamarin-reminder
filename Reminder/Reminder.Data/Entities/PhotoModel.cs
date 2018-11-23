@@ -1,4 +1,6 @@
-﻿namespace Reminder.Data.Entities
+﻿using Reminder.Data.Core;
+
+namespace Reminder.Data.Entities
 {
     public class PhotoModel : Entity
     {
