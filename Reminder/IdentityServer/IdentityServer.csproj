@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>0e4e9612-7101-44b8-a0b2-8aeabc458330</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer4.AspNetIdentity\IdentityServer4.AspNetIdentity.csproj" />
+    <ProjectReference Include="..\Reminder.Data\Reminder.Data.csproj" />
+    <ProjectReference Include="..\Reminder.Helpers\Reminder.Helpers.csproj" />
+  </ItemGroup>
+
+</Project>

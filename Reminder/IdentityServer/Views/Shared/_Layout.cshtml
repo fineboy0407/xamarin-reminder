@@ -1,0 +1,55 @@
+﻿@using IdentityServer4.Extensions
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IdentityServer</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+@*<div class="topnav">
+    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+    
+    @if (!string.IsNullOrWhiteSpace(name))
+    {
+        <ul class="topnav-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    Hello, @name! <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+</div>*@
+
+<div class="container">
+    @RenderBody()
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>
