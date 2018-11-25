@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Note} from '../note';
-import {NotesService} from '../notes.service';
-import {Subscription} from 'rxjs/Subscription';
-import {ActivatedRoute, Router} from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Note } from '../note';
+import { NotesService } from '../notes.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-notes-list',
@@ -15,9 +15,9 @@ export class NotesListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private notesService: NotesService,
-              private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
     if (!this.authService.isLoggedIn()) {
       alert('Please, login');
     }
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {
