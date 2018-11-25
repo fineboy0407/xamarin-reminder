@@ -1,7 +1,7 @@
 .header {
     background-size: auto;
     height: 100vh;
-    background: url("../../assets/img/mainpage_background.jpg") fixed no-repeat center;
+    background: url("../../assets/img/mainpage_background.jpg") fixed no-repeat top;
     color: white;
     text-align: center;
   }
