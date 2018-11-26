@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {NotesService} from '../notes.service';
-import {Router} from '@angular/router';
-import {Photo} from '../photo';
-import {Note} from '../note';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NotesService } from '../notes.service';
+import { Router } from '@angular/router';
+import { Photo } from '../photo';
+import { Note } from '../note';
 
 @Component({
   selector: 'app-create-note',

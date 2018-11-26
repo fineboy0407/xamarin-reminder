@@ -4,3 +4,4 @@ export class Photo {
                 public noteId?: number,
                 public image?: string) { }
   }
+  

@@ -10,7 +10,7 @@ const authRoutes: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'auth-callback', component: AuthCallbackComponent },
     { path: 'logout-callback', component: LogoutCallbackComponent }
-]
+];
 
 @NgModule({
     imports: [

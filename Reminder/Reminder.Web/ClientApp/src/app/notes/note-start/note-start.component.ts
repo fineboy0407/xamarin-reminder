@@ -11,5 +11,4 @@ export class NoteStartComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

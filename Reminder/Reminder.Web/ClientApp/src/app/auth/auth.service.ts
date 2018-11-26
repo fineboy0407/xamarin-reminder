@@ -44,31 +44,28 @@ export class AuthService {
     return null;
   }
 
-  authenticate() {
+  async authenticate() {
     this.manager.signinRedirect();
-    return this.manager.signinRedirectCallback().then(user => {
-      this.user = user;
-    });
+    const user = await this.manager.signinRedirectCallback();
+    this.user = user;
   }
 
   startAuthentication(): Promise<void> {
     return this.manager.signinRedirect();
   }
 
-  completeAuthentication(): Promise<void> {
-    return this.manager.signinRedirectCallback().then(user => {
-      this.user = user;
-    });
+  async completeAuthentication(): Promise<void> {
+    const user = await this.manager.signinRedirectCallback();
+    this.user = user;
   }
 
   startLogout(): Promise<void> {
     return this.manager.signoutRedirect();
   }
 
-  completeLogout(): Promise<void> {
-    return this.manager.signoutRedirectCallback().then(user => {
-      this.user = null;
-    });
+  async completeLogout(): Promise<void> {
+    const user = await this.manager.signoutRedirectCallback();
+    this.user = null;
   }
 
   register(email: string, password: string) {

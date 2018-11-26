@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NotesService} from '../notes.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import { NotesService } from '../notes.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-note-edit',
@@ -12,8 +12,8 @@ export class NoteEditComponent implements OnInit {
   editMode = false;
 
   constructor(private route: ActivatedRoute,
-              private noteService: NotesService,
-              private router: Router) { }
+    private noteService: NotesService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params

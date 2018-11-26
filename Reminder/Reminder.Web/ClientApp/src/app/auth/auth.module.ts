@@ -4,8 +4,9 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { LogoutCallbackComponent } from './logout-callback/logout-callback.component';
-import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth.routing.module';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { AuthRoutingModule } from './auth.routing.module';
         LogoutCallbackComponent
     ],
     imports: [
+        CoreModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,

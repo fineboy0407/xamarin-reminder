@@ -7,7 +7,7 @@ import { NoteEditComponent } from './note-edit/note-edit.component';
 import { AuthGuardService } from '../auth/auth.guard.service';
 import { NoteDetailsComponent } from './note-details/note-details.component';
 
-const recipesRoutes: Routes = [
+const noteRoutes: Routes = [
   {
     path: '', component: NotesComponent, canActivate: [AuthGuardService], children: [
       { path: '', component: NoteStartComponent },
@@ -20,7 +20,7 @@ const recipesRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(recipesRoutes)
+    RouterModule.forChild(noteRoutes)
   ],
   exports: [RouterModule],
   providers: [

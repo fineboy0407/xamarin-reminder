@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NotesService } from './notes/notes.service';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth.guard.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -15,11 +14,11 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,10 +27,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    AppRoutingModule,
     CoreModule,
     AuthModule,
-    HttpClientModule
+    AppRoutingModule,
+    ErrorsModule
   ],
   providers: [
     NotesService,
