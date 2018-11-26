@@ -7,7 +7,7 @@ import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class NotesService {
   private headers: HttpHeaders;
-  private url = 'http://localhost:49790/api/notes';
+  private url = 'http://localhost:44342/api/notes';
 
   private notes: Note[] = [];
   notesChanged = new Subject<Note[]>();

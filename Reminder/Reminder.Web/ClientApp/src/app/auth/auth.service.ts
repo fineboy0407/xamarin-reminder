@@ -4,12 +4,12 @@ import {UserManager, UserManagerSettings, User, WebStorageStateStore} from 'oidc
 
 export function getClientSettings(): UserManagerSettings {
   return {
-    authority: 'http://localhost:51866/',
+    authority: 'http://localhost:44342/',
     client_id: 'Angular_client',
     redirect_uri: 'http://localhost:4200/auth-callback',
     post_logout_redirect_uri: 'http://localhost:4200/logout-callback',
     response_type: 'id_token token',
-    scope: 'openid profile MD.CoreApi custom.profile',
+    scope: 'openid profile Reminder.CoreApi custom.profile',
     filterProtocolClaims: true,
     loadUserInfo: true,
     userStore: new WebStorageStateStore({ store: window.localStorage })

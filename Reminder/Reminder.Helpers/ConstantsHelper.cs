@@ -13,7 +13,7 @@ namespace Reminder.Helpers
         public const string PasswordIncorrect = "Password incorrect";
         public const string PasswordErrorMessage = "Enter correct password";
 
-        public const string ApiUrl = "https://localhost:44350/api/notes";
+        public const string ApiUrl = "https://localhost:44342/api/notes";
         public const string ApiName = "Reminder.CoreApi";
         public const string AuthenticationType = "Bearer";
         public const string CorsPolicy = "CorsPolicy";
