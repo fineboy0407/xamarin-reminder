@@ -20,6 +20,15 @@ namespace IdentityServer.Controllers.Home
             _environment = environment;
         }
 
+        public IActionResult Index()
+        {
+            if (_environment.IsDevelopment())
+            {
+
+            }
+            return View();
+        }
+
         /// <summary>
         /// Shows the error page
         /// </summary>

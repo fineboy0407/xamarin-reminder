@@ -4,7 +4,7 @@ import {UserManager, UserManagerSettings, User, WebStorageStateStore} from 'oidc
 
 export function getClientSettings(): UserManagerSettings {
   return {
-    authority: 'http://localhost:44342/',
+    authority: 'http://localhost:53496/',
     client_id: 'Angular_client',
     redirect_uri: 'http://localhost:4200/auth-callback',
     post_logout_redirect_uri: 'http://localhost:4200/logout-callback',

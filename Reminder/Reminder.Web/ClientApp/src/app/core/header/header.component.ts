@@ -13,14 +13,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  onLogin() {
+    this.authService.startAuthentication();
+  }
+
   onLogout() {
     this.authService.startLogout();
-    // localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 
   isAuthenticated() {
     return this.authService.isLoggedIn();
-    // return localStorage.getItem('user') != null;
   }
 }
